@@ -31,7 +31,7 @@ public class TortueView {
         listSegments.clear();
     }
     
-    public void drawTurtle (Graphics graph) {
+    public void drawTurtle(Graphics graph) {
         if (graph == null) return;
 
         // Dessine les segments<
