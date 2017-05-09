@@ -1,12 +1,14 @@
 
 package model;
 
+import java.util.Observable;
+
 /**
  *
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class Tortue {
+public class Tortue extends Observable {
 
     protected static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
     protected int x = 0, y = 0;
@@ -14,17 +16,27 @@ public class Tortue {
     protected boolean crayon = true;
     protected int couleur = 0;
 
+    public Tortue() {
+        reset();
+        x = 500/2;
+        y = 400/2;
+    }
+
     public void reset() {
         x = 0;
         y = 0;
         direction = -90;
         couleur = 0;
         crayon = true;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void setPosition(int newX, int newY) {
         x = newX;
         y = newY;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void avancer(int dist) {
@@ -45,30 +57,44 @@ public class Tortue {
 
         x = newX;
         y = newY;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void droite(int ang) {
         direction = (direction + ang) % 360;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void gauche(int ang) {
         direction = (direction - ang) % 360;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void baisserCrayon() {
         crayon = true;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void leverCrayon() {
         crayon = false;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void couleur(int n) {
         couleur = n % 12;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void couleurSuivante() {
         couleur(couleur + 1);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     /** quelques classiques */
@@ -120,6 +146,13 @@ public class Tortue {
         return couleur;
     }
     
-    public void setColor(int n) {couleur = n;}
-    public int getColor() {return couleur;}
+    public void setColor(int n) {
+        couleur = n;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public int getColor() {
+        return couleur;
+    }
 }

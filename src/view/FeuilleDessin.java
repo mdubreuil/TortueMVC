@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JPanel;
 
 /**
@@ -13,11 +15,20 @@ import javax.swing.JPanel;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class FeuilleDessin extends JPanel {
-    private ArrayList<TortueView> tortues;
+public class FeuilleDessin extends JPanel implements Observer
+{
+    protected List<TortueView> tortues; // la liste des sous-vues
 	
     public FeuilleDessin() {
+        setBackground(Color.white);
+        setSize(new Dimension(600,400));
+        setPreferredSize(new Dimension(600,400));
+        
         tortues = new ArrayList();
+    }
+
+    public void addTortue(TortueView o) {
+        tortues.add(o);
     }
 
     @Override
@@ -34,9 +45,13 @@ public class FeuilleDessin extends JPanel {
     }
 
     public void showTurtles(Graphics g) {
-        for (Iterator it = tortues.iterator(); it.hasNext();) {
-            TortueView t = (TortueView) it.next();
+        for (TortueView t : tortues) {
             t.drawTurtle(g);
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.repaint();
     }
 }

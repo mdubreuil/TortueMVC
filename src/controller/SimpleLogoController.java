@@ -1,10 +1,11 @@
 
 package controller;
 
-import java.util.ArrayList;
 import javax.swing.SwingUtilities;
+import model.Feuille;
 import model.Tortue;
 import view.SimpleLogoView;
+import view.TortueView;
 
 /**
  * Class Main = Controlleur
@@ -14,8 +15,8 @@ import view.SimpleLogoView;
 public class SimpleLogoController {
 
     private static SimpleLogoView window;
+    private Feuille feuille;
     private Tortue courante;
-    private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
     
     /**
      * @param args
@@ -31,32 +32,24 @@ public class SimpleLogoController {
     }
 
     public SimpleLogoController() {
-        tortues = new ArrayList();
-        
+        feuille = new Feuille();
+        feuille.addObserver(window.getFeuille());
+
         // Creation de la tortue
-        courante = new Tortue();
-        // Deplacement de la tortue au centre de la feuille
-        courante.setPosition(500/2, 400/2); 		
-
-        tortues.add(courante);
+        Tortue tortue = new Tortue();
+        this.addTortue(tortue);
+        courante = tortue;
+    }
+    
+    public void addTortue(Tortue tortue)
+    {
+        TortueView view = new TortueView(tortue);
+        tortue.addObserver(view);
+        
+        window.addTortue(view);
+        feuille.addTortue(tortue);
     }
 
-    public void addTortue(Tortue o) {
-        tortues.add(o);
-    }
-    
-    public ArrayList<Tortue> getTortues() {
-        return tortues;
-    }
-
-    public void reset() {
-        for (Tortue t : tortues) {
-            t.reset();
-        }
-    }
-    
-    
-    
     public void changeColor(int n) {
         courante.setColor(n);
     }
@@ -100,5 +93,9 @@ public class SimpleLogoController {
 
     public void proc3() {
         courante.spiral(50,40,6);
+    }
+
+    public void resetFeuille() {
+        feuille.reset();
     }
 }

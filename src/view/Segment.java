@@ -23,7 +23,7 @@ public class Segment {
 
     public void drawSegment(Graphics graph) {
         if (graph==null)
-                return;
+            return;
 
         graph.setColor(color);
         graph.drawLine(ptStart.x, ptStart.y, ptEnd.x, ptEnd.y);

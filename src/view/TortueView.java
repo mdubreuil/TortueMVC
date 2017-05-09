@@ -7,6 +7,8 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 import model.Tortue;
 
 /**
@@ -14,7 +16,7 @@ import model.Tortue;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class TortueView {
+public class TortueView implements Observer {
     
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
@@ -68,5 +70,11 @@ public class TortueView {
         arrow.addPoint(p2.x,p2.y);
         graph.setColor(Color.green);
         graph.fillPolygon(arrow);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // Deplacement de la tortue au centre de la feuille
+        tortue.setPosition(500/2, 400/2);
     }
 }

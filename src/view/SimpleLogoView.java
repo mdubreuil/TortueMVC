@@ -3,7 +3,6 @@ package view;
 
 import controller.SimpleLogoController;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.GridLayout;
@@ -13,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -29,14 +30,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import model.Tortue;
 
 /**
  *
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class SimpleLogoView extends JFrame implements ActionListener {
+public class SimpleLogoView extends JFrame implements ActionListener, Observer {
     
     private final SimpleLogoController controller;
 
@@ -45,14 +45,22 @@ public class SimpleLogoView extends JFrame implements ActionListener {
 
     private FeuilleDessin feuille;
     private JTextField inputValue;
-	private JComboBox colorList;
+    private JComboBox colorList;
 
-	public JTextField getInputValue() {
+    public JTextField getInputValue() {
         return inputValue;
-    }  
+    }
+    
+//    public String getInputValue() {
+//        return inputValue.getText();
+//    }
 
     public JComboBox getColorList() {
         return colorList;
+    }
+
+    public FeuilleDessin getFeuille() {
+        return feuille;
     }
 
     public SimpleLogoView(SimpleLogoController controller) {
@@ -149,24 +157,19 @@ public class SimpleLogoView extends JFrame implements ActionListener {
 
         getContentPane().add(p2,"South");
 
-        feuille = new FeuilleDessin(); //500, 400);
-        feuille.setBackground(Color.white);
-        feuille.setSize(new Dimension(600,400));
-        feuille.setPreferredSize(new Dimension(600,400));
-
-        getContentPane().add(feuille,"Center");
-
-        // Creation de la tortue
-        Tortue tortue = new Tortue();
-
-        // Deplacement de la tortue au centre de la feuille
-        tortue.setPosition(500/2, 400/2); 		
-
-//        courante = tortue;
-//        feuille.addTortue(tortue);
+        drawFeuille();
 
         pack();
         setVisible(true);
+    }
+    
+    
+    protected void drawFeuille() {
+        feuille = new FeuilleDessin(); //500, 400);
+//        feuille.setBackground(Color.white);
+//        feuille.setSize(new Dimension(600,400));
+//        feuille.setPreferredSize(new Dimension(600,400));
+        getContentPane().add(feuille,"Center");
     }
 
     /** la gestion des actions des boutons
@@ -221,7 +224,8 @@ public class SimpleLogoView extends JFrame implements ActionListener {
     // efface tout et reinitialise la feuille
     public void effacer() {
 //        feuille.reset();
-        feuille.repaint();
+        controller.resetFeuille();
+//        feuille.repaint();
 
         // Replace la tortue au centre
         Dimension size = feuille.getSize();
@@ -264,5 +268,32 @@ public class SimpleLogoView extends JFrame implements ActionListener {
                 menuItem.setAccelerator(KeyStroke.getKeyStroke(key, 0, false));
             }
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+//        if(o instanceof Feuille) // Case devrait être générique, donc on peut l'utiliser dans la vue générique
+//        {
+//            Feuille c = (Feuille)o;
+//            feuille.
+//            
+//            if(c.isVisible() && c.isTrapped()) { // Si la case est une bombe
+//                // On perd la partie
+//                plateau.propagateExplosion();
+//            
+//            } else { // Sinon
+//                // On notifie le modèle qu'il doit mettre à jour son compteur de drapeaux
+//                plateau.updateNbMinesLeft();
+//                
+//                // Vérification que la partie est gagnée.
+//                plateau.updateGameStateIfWin();
+//            }
+//        }
+    }
+
+    public void addTortue(TortueView tortue) {
+        feuille.addTortue(tortue);
     }
 }
