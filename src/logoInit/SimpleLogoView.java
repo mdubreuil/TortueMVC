@@ -1,53 +1,21 @@
+package logoInit;
 
-package view;
-
-import controller.SimpleLogoController;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Event;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
-import model.Tortue;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
 /**
- *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * 
+ * @author Epulapp
  */
-public class SimpleLogoView extends JFrame implements ActionListener {
-    
-    private final SimpleLogoController controller;
-
+public class SimpleLogoView extends JFrame {
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
-
-    private FeuilleDessin feuille;
     private JTextField inputValue;
-	private JComboBox colorList;
-
-	public JTextField getInputValue() {
+    private JComboBox colorList;
+    private Feuille feuille;
+    
+    public JTextField getInputValue() {
         return inputValue;
     }  
 
@@ -55,13 +23,15 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         return colorList;
     }
 
+    private void quitter() {
+        System.exit(0);
+    }
+
     public SimpleLogoView(SimpleLogoController controller) {
         super("un logo tout simple");
-        this.controller = controller;
-        
-        this.logoInit();
+        logoInit();
 
-        this.addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent arg0) {
                 super.windowClosing(arg0);
@@ -83,7 +53,7 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
 
         toolBar.add(Box.createRigidArea(HGAP));
-        inputValue = new JTextField("45",5);
+        inputValue=new JTextField("45",5);
         toolBar.add(inputValue);
         addButton(toolBar, "Avancer", "Avancer 50", null);
         addButton(toolBar, "Droite", "Droite 45", null);
@@ -92,24 +62,26 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         addButton(toolBar, "Baisser", "Baisser Crayon", null);
 
         String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
-                                "vert", "gris clair", "magenta", "orange",
-                                "gris", "rose", "jaune"};
+                                                         "vert", "gris clair", "magenta", "orange",
+                                                         "gris", "rose", "jaune"};
 
         // Create the combo box
         toolBar.add(Box.createRigidArea(HGAP));
         JLabel colorLabel = new JLabel("   Couleur: ");
         toolBar.add(colorLabel);
-        JComboBox colorList = new JComboBox(colorStrings);
+        colorList = new JComboBox(colorStrings);
         toolBar.add(colorList);
 
         colorList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox cb = (JComboBox)e.getSource();
-                int n = cb.getSelectedIndex();
-                controller.changeColor(n);
-            }
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        JComboBox cb = (JComboBox)e.getSource();
+                        int n = cb.getSelectedIndex();
+                        // TODO : appel controller
+                        //courante.setColor(n);
+                }
         });
+
 
         // Menus
         JMenuBar menubar=new JMenuBar();
@@ -139,17 +111,17 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         JPanel p2 = new JPanel(new GridLayout());
         JButton b20 = new JButton("Proc1");
         p2.add(b20);
-        b20.addActionListener(this);
+        //b20.addActionListener(this);
         JButton b21 = new JButton("Proc2");
         p2.add(b21);
-        b21.addActionListener(this);
+        //b21.addActionListener(this);
         JButton b22 = new JButton("Proc3");
         p2.add(b22);
-        b22.addActionListener(this);
+        //b22.addActionListener(this);
 
         getContentPane().add(p2,"South");
 
-        feuille = new FeuilleDessin(); //500, 400);
+        feuille = new Feuille(); //500, 400);
         feuille.setBackground(Color.white);
         feuille.setSize(new Dimension(600,400));
         feuille.setPreferredSize(new Dimension(600,400));
@@ -157,82 +129,28 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         getContentPane().add(feuille,"Center");
 
         // Creation de la tortue
-        Tortue tortue = new Tortue();
+        //Tortue tortue = new Tortue();
 
         // Deplacement de la tortue au centre de la feuille
-        tortue.setPosition(500/2, 400/2); 		
+        //tortue.setPosition(500/2, 400/2); 		
 
-//        courante = tortue;
-//        feuille.addTortue(tortue);
+        //courante = tortue;
+        //feuille.addTortue(tortue);
 
         pack();
         setVisible(true);
     }
 
-    /** la gestion des actions des boutons
-     * @param e */
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        String c = e.getActionCommand();
-
-        // actions des boutons du haut
-        if (c.equals("Avancer")) {
-            System.out.println("command avancer");
-            try {
-                int v = Integer.parseInt(inputValue.getText());
-                controller.avancer(v);
-            } catch (NumberFormatException ex) {
-                System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-            }
-        } else if (c.equals("Droite")) {
-            try {
-                int v = Integer.parseInt(inputValue.getText());
-                controller.droite(v);
-            } catch (NumberFormatException ex) {
-                System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-            }
-        } else if (c.equals("Gauche")) {
-            try {
-                int v = Integer.parseInt(inputValue.getText());
-                controller.gauche(v);
-            } catch (NumberFormatException ex){
-                System.err.println("ce n'est pas un nombre : " + inputValue.getText());
-            }
-        } else if (c.equals("Lever")) {
-            controller.leverCrayon();
-        } else if (c.equals("Baisser")) {
-            controller.baisserCrayon();
-        } else if (c.equals("Proc1")) { // actions des boutons du bas
-            controller.proc1();
-        } else if (c.equals("Proc2")) {
-            controller.proc2();
-        } else if (c.equals("Proc3")) {
-            controller.proc3();
-        } else if (c.equals("Effacer")) {
-            this.effacer();
-        } else if (c.equals("Quitter")) {
-            controller.quitter();
-        }
-
-        feuille.repaint();
-    }
-
-    // efface tout et reinitialise la feuille
-    public void effacer() {
-//        feuille.reset();
-        feuille.repaint();
-
-        // Replace la tortue au centre
-        Dimension size = feuille.getSize();
-        controller.changePosition(size.width/2, size.height/2);
-    }
+//	public String getInputValue(){
+//		String s = inputValue.getText();
+//		return(s);
+//	}
 
     //utilitaires pour installer des boutons et des menus
     public void addButton(JComponent p, String name, String tooltiptext, String imageName) {
         JButton b;
         if ((imageName == null) || (imageName.equals(""))) {
-            b = (JButton)p.add(new JButton(name));
+                b = (JButton)p.add(new JButton(name));
         } else {
             java.net.URL u = this.getClass().getResource(imageName);
             if (u != null) {
@@ -241,13 +159,14 @@ public class SimpleLogoView extends JFrame implements ActionListener {
             } else {
                 b = (JButton) p.add(new JButton(name));
             }
+
             b.setActionCommand(name);
         }
 
         b.setToolTipText(tooltiptext);
         b.setBorder(BorderFactory.createRaisedBevelBorder());
         b.setMargin(new Insets(0,0,0,0));
-        b.addActionListener(this);
+        //b.addActionListener(this);
     }
 
     public void addMenuItem(JMenu m, String label, String command, int key) {
@@ -256,7 +175,7 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         m.add(menuItem);
 
         menuItem.setActionCommand(command);
-        menuItem.addActionListener(this);
+        //menuItem.addActionListener(this);
         if (key > 0) {
             if (key != KeyEvent.VK_DELETE) {
                 menuItem.setAccelerator(KeyStroke.getKeyStroke(key, Event.CTRL_MASK, false));

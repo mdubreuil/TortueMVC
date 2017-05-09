@@ -7,12 +7,16 @@ import model.Tortue;
 import view.SimpleLogoView;
 
 /**
- *
+ * Class Main = Controlleur
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
 public class SimpleLogoController {
 
+    private static SimpleLogoView window;
+    private Tortue courante;
+    private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
+    
     /**
      * @param args
      */
@@ -20,14 +24,11 @@ public class SimpleLogoController {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
-                SimpleLogoView fenetre = new SimpleLogoView(new SimpleLogoController());
-                fenetre.setVisible(true);
+                window = new SimpleLogoView(new SimpleLogoController());
+                window.setVisible(true);
             }
         });
     }
-    
-    private Tortue courante;
-    private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
 
     public SimpleLogoController() {
         tortues = new ArrayList();
