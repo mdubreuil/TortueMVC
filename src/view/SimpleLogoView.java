@@ -149,20 +149,6 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         addMenuItem(menuHelp, "A propos", "About", -1);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        // les boutons du bas
-        JPanel p2 = new JPanel(new GridLayout());
-        JButton b20 = new JButton("Proc1");
-        p2.add(b20);
-        b20.addActionListener(this);
-        JButton b21 = new JButton("Proc2");
-        p2.add(b21);
-        b21.addActionListener(this);
-        JButton b22 = new JButton("Proc3");
-        p2.add(b22);
-        b22.addActionListener(this);
-
-        getContentPane().add(p2,"South");
         
         // la feuille de dessin
         getContentPane().add(feuille, "Center");
@@ -207,14 +193,20 @@ public class SimpleLogoView extends JFrame implements ActionListener {
             controller.baisserCrayon();
         } else if (c.equals("Ajouter")) {
             int n = colorList.getSelectedIndex();
-            controller.addNewTortue();
+            int typeTortue = listeTortues.getSelectedIndex();
+            switch(typeTortue) {
+                case 0 : controller.addNewTortueClassique();
+                    break;
+                case 1 :
+                    controller.addNewTortueAmelioree();
+                    System.out.println(inputNom.getText() + " will be created later.");
+                    break;
+                case 2 : System.out.println("Not implemented yet 2.");
+                    break;
+                default : controller.addNewTortueClassique();               
+                
+            }
             controller.changeColor(n);
-        } else if (c.equals("Proc1")) { // actions des boutons du bas
-            controller.proc1();
-        } else if (c.equals("Proc2")) {
-            controller.proc2();
-        } else if (c.equals("Proc3")) {
-            controller.proc3();
         } else if (c.equals("Effacer")) {
             this.effacer();
         } else if (c.equals("Quitter")) {

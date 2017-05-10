@@ -119,15 +119,18 @@ public class SimpleLogoController implements MouseListener {
         feuille.setCourante(tortue);
     }
     
-    public void addNewTortue()
+    public void addNewTortueClassique()
     {
         Tortue t = new Tortue();
-        t.addObserver(feuilleView);
-        
+        t.addObserver(feuilleView);        
         TortueView tView = new TortueView(t);
         feuilleView.addTortue(tView);
-
         setCourante(t);
+    }
+    
+    public void addNewTortueAmelioree()
+    {
+        
     }
 
     @Override
