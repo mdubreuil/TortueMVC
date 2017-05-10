@@ -45,7 +45,7 @@ public class SimpleLogoController {
         feuilleView.addTortue(couranteView);
 
         // Add listeners
-        courante.addObserver(couranteView);
+//        courante.addObserver(couranteView);
         feuille.addObserver(feuilleView);
         
         window = new SimpleLogoView(this, feuilleView);
@@ -115,4 +115,15 @@ public class SimpleLogoController {
     {
         return feuille.getCourante();
     }
+    
+    protected void setCourante(Tortue tortue)
+    {
+        feuille.addTortue(tortue);
+        feuille.setCourante(courante);
+    }
+    
+//    protected void addNewTortue(Color color)
+//    {
+//        
+//    }
 }

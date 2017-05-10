@@ -27,9 +27,11 @@ public class Feuille extends Observable {
     }
 
     public void addTortue(Tortue o) {
-        tortues.add(o);
-        this.setChanged();
-        this.notifyObservers();
+        if (!tortues.contains(o)) {
+            tortues.add(o);
+            this.setChanged();
+            this.notifyObservers();
+        }
     }
 
     public void reset() {

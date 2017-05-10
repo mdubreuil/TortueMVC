@@ -27,6 +27,16 @@ public class FeuilleDessin extends JPanel implements Observer
         tortues = new ArrayList();
     }
 
+    public void showTurtles(Graphics g) {
+        for (TortueView t : tortues) {
+            t.drawTurtle(g);
+        }
+    }
+
+    public void reset() {
+        tortues.clear();
+    }
+    
     public void addTortue(TortueView o) {
         tortues.add(o);
     }
@@ -44,21 +54,8 @@ public class FeuilleDessin extends JPanel implements Observer
         showTurtles(g);
     }
 
-    public void showTurtles(Graphics g) {
-        for (TortueView t : tortues) {
-            t.drawTurtle(g);
-        }
-    }
-
-    public void reset() {
-        tortues.clear();
-    }
-
     @Override
     public void update(Observable o, Object arg) {
-//        Feuille feuille = (Feuille) o;
-//        List<Tortue> tortues = feuille.getTortues();
-//
         this.repaint();
     }
 }
