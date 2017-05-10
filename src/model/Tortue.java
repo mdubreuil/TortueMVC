@@ -21,6 +21,13 @@ public class Tortue extends Observable {
         x = 500/2;
         y = 400/2;
     }
+    
+    public Tortue(int c) {
+        reset();
+        x = 500/2;
+        y = 400/2;
+        couleur = c;
+    }
 
     public void reset() {
         x = 0;
@@ -147,6 +154,7 @@ public class Tortue extends Observable {
     }
     
     public void setColor(int n) {
+        System.out.println("changing color");
         couleur = n;
         this.setChanged();
         this.notifyObservers();

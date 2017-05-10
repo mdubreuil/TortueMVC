@@ -29,11 +29,10 @@ public class Feuille extends Observable {
     public Tortue getTortue(int x, int y){
         for (Tortue t : tortues) {
             if ((x - 15 < t.getX()) && (t.getX() < x + 15) && (y - 15 < t.getY()) &&(t.getY() < y + 15)){
-                System.out.println("nouvelle tortue");
                 return t;
             }
         }
-        return null;
+        return courante;
     }
 
     public void addTortue(Tortue o) {
