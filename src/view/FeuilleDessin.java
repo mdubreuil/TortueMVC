@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
+import model.Feuille;
 
 /**
  *
@@ -52,6 +53,11 @@ public class FeuilleDessin extends JPanel implements Observer
 
     @Override
     public void update(Observable o, Object arg) {
+        // Test reset
+        if (o instanceof Feuille && ((Feuille)o).getTortues().isEmpty()) {
+            tortues.clear();
+        }
+
         this.repaint();
     }
 }

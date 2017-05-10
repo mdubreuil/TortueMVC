@@ -44,9 +44,10 @@ public class Feuille extends Observable {
     }
 
     public void reset() {
-        for (Tortue t : tortues) {
-            t.reset();
-        }
+//        for (Tortue t : tortues) {
+//            t.reset();
+//        }
+        tortues.clear();
         this.setChanged();
         this.notifyObservers();
     }
