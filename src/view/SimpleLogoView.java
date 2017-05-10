@@ -198,8 +198,7 @@ public class SimpleLogoView extends JFrame implements ActionListener {
                 case 0 : controller.addNewTortueClassique();
                     break;
                 case 1 :
-                    controller.addNewTortueAmelioree();
-                    System.out.println(inputNom.getText() + " will be created later.");
+                    controller.addNewTortueAmelioree(inputNom.getText());
                     break;
                 case 2 : System.out.println("Not implemented yet 2.");
                     break;

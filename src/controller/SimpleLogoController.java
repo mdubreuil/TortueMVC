@@ -6,8 +6,10 @@ import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import model.Feuille;
 import model.Tortue;
+import model.TortueAmelioree;
 import view.FeuilleDessin;
 import view.SimpleLogoView;
+import view.TortueAmelioreeView;
 import view.TortueView;
 
 /**
@@ -128,9 +130,22 @@ public class SimpleLogoController implements MouseListener {
         setCourante(t);
     }
     
-    public void addNewTortueAmelioree()
+    public void addNewTortueAmelioree(String name)
     {
+        TortueAmelioree t = new TortueAmelioree(name);
+
+        for (Tortue tortue : feuille.getTortues()) {
+            t.addTortue(tortue);
+            
+            if (tortue instanceof TortueAmelioree) {
+                ((TortueAmelioree)tortue).addTortue(t);
+            }
+        }
         
+        t.addObserver(feuilleView);
+        TortueView tView = new TortueAmelioreeView(t);
+        feuilleView.addTortue(tView);
+        setCourante(t);
     }
 
     @Override
