@@ -104,6 +104,7 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         addButton(toolBar, "Gauche", "Gauche 45", null);
         addButton(toolBar, "Lever", "Lever Crayon", null);
         addButton(toolBar, "Baisser", "Baisser Crayon", null);
+        addButton(toolBar, "Ajouter", "Ajouter tortue", null);
 
         String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
                                 "vert", "gris clair", "magenta", "orange",
@@ -113,7 +114,7 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         toolBar.add(Box.createRigidArea(HGAP));
         JLabel colorLabel = new JLabel("   Couleur: ");
         toolBar.add(colorLabel);
-        JComboBox colorList = new JComboBox(colorStrings);
+        colorList = new JComboBox(colorStrings);
         toolBar.add(colorList);
 
         colorList.addActionListener(new ActionListener() {
@@ -215,6 +216,10 @@ public class SimpleLogoView extends JFrame implements ActionListener {
             controller.leverCrayon();
         } else if (c.equals("Baisser")) {
             controller.baisserCrayon();
+        } else if (c.equals("Ajouter")) {
+            int n = colorList.getSelectedIndex();
+            controller.addNewTortue();
+            controller.changeColor(n);
         } else if (c.equals("Proc1")) { // actions des boutons du bas
             controller.proc1();
         } else if (c.equals("Proc2")) {

@@ -25,6 +25,16 @@ public class Feuille extends Observable {
         this.courante = courante;
         addTortue(courante);
     }
+    
+    public Tortue getTortue(int x, int y){
+        for (Tortue t : tortues) {
+            if ((x - 15 < t.getX()) && (t.getX() < x + 15) && (y - 15 < t.getY()) &&(t.getY() < y + 15)){
+                System.out.println("nouvelle tortue");
+                return t;
+            }
+        }
+        return null;
+    }
 
     public void addTortue(Tortue o) {
         if (!tortues.contains(o)) {

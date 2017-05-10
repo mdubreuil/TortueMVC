@@ -1,6 +1,8 @@
 
 package controller;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import model.Feuille;
 import model.Tortue;
@@ -13,7 +15,7 @@ import view.TortueView;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class SimpleLogoController {
+public class SimpleLogoController implements MouseListener {
 
     private static SimpleLogoView window = null;
     private Feuille feuille = null;
@@ -41,6 +43,7 @@ public class SimpleLogoController {
 
         // Views
         feuilleView = new FeuilleDessin();
+        feuilleView.addMouseListener(this);
         couranteView = new TortueView(courante);
         feuilleView.addTortue(couranteView);
 
@@ -122,8 +125,34 @@ public class SimpleLogoController {
         feuille.setCourante(courante);
     }
     
-//    protected void addNewTortue(Color color)
-//    {
-//        
-//    }
+    public void addNewTortue()
+    {
+        // Model
+        Tortue t = new Tortue();
+        // View
+        TortueView tView = new TortueView(t);
+        feuilleView.addTortue(tView);
+        
+        
+        this.setCourante(t);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int x = e.getX(), y = e.getY();
+        courante = feuille.getTortue(x, y);
+        feuille.setCourante(courante);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }

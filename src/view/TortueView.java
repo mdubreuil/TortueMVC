@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JComponent;
 import model.Tortue;
 
 /**
@@ -14,7 +15,7 @@ import model.Tortue;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class TortueView
+public class TortueView extends JComponent
 {    
     protected ArrayList<Segment> listSegments; // Trace de la tortue
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
@@ -23,7 +24,7 @@ public class TortueView
 
     public TortueView(Tortue tortue) {
         this.listSegments = new ArrayList();
-        this.tortue = tortue;
+        this.tortue = tortue;   
     }
     
     public Tortue getTortue() {
@@ -69,7 +70,25 @@ public class TortueView
           (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
 
         arrow.addPoint(p2.x,p2.y);
-        graphics.setColor(Color.green);
+        graphics.setColor(decodeColor(tortue.getColor()));
         graphics.fillPolygon(arrow);
+    }
+    
+    public Color decodeColor(int c) {
+        switch(c) {
+            case 0: return(Color.black);
+            case 1: return(Color.blue);
+            case 2: return(Color.cyan);
+            case 3: return(Color.darkGray);
+            case 4: return(Color.red);
+            case 5: return(Color.green);
+            case 6: return(Color.lightGray);
+            case 7: return(Color.magenta);
+            case 8: return(Color.orange);
+            case 9: return(Color.gray);
+            case 10: return(Color.pink);
+            case 11: return(Color.yellow);
+            default : return(Color.black);
+        }
     }
 }
