@@ -16,35 +16,34 @@ import model.Tortue;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class TortueView implements Observer {
-    
+public class TortueView implements Observer
+{    
+    protected ArrayList<Segment> listSegments; // Trace de la tortue
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
     protected Tortue tortue;
-    protected ArrayList<Segment> listSegments; // Trace de la tortue
-    
+
     public TortueView(Tortue tortue) {
+        this.listSegments = new ArrayList();
         this.tortue = tortue;
-        listSegments = new ArrayList();
     }
-    
+
     public void reset() {
-        tortue.reset();
         listSegments.clear();
     }
-    
-    public void drawTurtle(Graphics graph) {
-        if (graph == null) return;
+
+    public void drawTurtle(Graphics graphics) {
+        if (graphics == null) return;
 
         // Dessine les segments<
         for (Iterator it = listSegments.iterator(); it.hasNext();) {
             Segment seg = (Segment) it.next();
-            seg.drawSegment(graph);
+            seg.drawSegment(graphics);
         }
 
         //Calcule les 3 coins du triangle a partir de
         // la position de la tortue p
-        Point p = new Point(tortue.getX(),tortue.getY());
+        Point p = new Point(tortue.getX(), tortue.getY());
         Polygon arrow = new Polygon();
 
         //Calcule des deux bases
@@ -68,13 +67,15 @@ public class TortueView implements Observer {
           (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
 
         arrow.addPoint(p2.x,p2.y);
-        graph.setColor(Color.green);
-        graph.fillPolygon(arrow);
+        graphics.setColor(Color.green);
+        graphics.fillPolygon(arrow);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        // Deplacement de la tortue au centre de la feuille
-        tortue.setPosition(500/2, 400/2);
+//        Tortue tortue = (Tortue) o;
+////        // Deplacement de la tortue au centre de la feuille
+////        tortue.setPosition(500/2, 400/2);
+//        drawTurtle();
     }
 }

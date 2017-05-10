@@ -50,8 +50,15 @@ public class FeuilleDessin extends JPanel implements Observer
         }
     }
 
+    public void reset() {
+        tortues.clear();
+    }
+
     @Override
     public void update(Observable o, Object arg) {
+//        Feuille feuille = (Feuille) o;
+//        List<Tortue> tortues = feuille.getTortues();
+//
         this.repaint();
     }
 }

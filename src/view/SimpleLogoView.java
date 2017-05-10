@@ -12,8 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -36,16 +34,23 @@ import javax.swing.KeyStroke;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class SimpleLogoView extends JFrame implements ActionListener, Observer {
-    
+public class SimpleLogoView extends JFrame implements ActionListener {
+    /**
+     * - La vue peut faire des requêtes d'état sur le modèle, signifie qu'elle peut avoir une dépendance vers le modèle. Slide 4/10 rappel MVC
+     * - Chaque vue est associée à un controlleur, et chaque controleur est associé à une vue (écouteur d'évènements)
+     * - Chaque controleur connait le modèle
+     * - Le modèle ne connait ni la vue, ni le controlleur
+     * Exemple MVC : http://baptiste-wicht.developpez.com/tutoriels/conception/mvc/
+     */
     private final SimpleLogoController controller;
 
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
 
-    private FeuilleDessin feuille;
     private JTextField inputValue;
     private JComboBox colorList;
+    
+    private FeuilleDessin feuille;
 
     public JTextField getInputValue() {
         return inputValue;
@@ -63,9 +68,10 @@ public class SimpleLogoView extends JFrame implements ActionListener, Observer {
         return feuille;
     }
 
-    public SimpleLogoView(SimpleLogoController controller) {
+    public SimpleLogoView(SimpleLogoController controller, FeuilleDessin feuille) {
         super("un logo tout simple");
         this.controller = controller;
+        this.feuille = feuille;
         
         this.logoInit();
 
@@ -156,8 +162,11 @@ public class SimpleLogoView extends JFrame implements ActionListener, Observer {
         b22.addActionListener(this);
 
         getContentPane().add(p2,"South");
-
-        drawFeuille();
+        
+        // la feuille de dessin
+        getContentPane().add(feuille, "Center");
+//        drawFeuille();
+//        controller.addNewFeuille();
 
         pack();
         setVisible(true);
@@ -270,30 +279,12 @@ public class SimpleLogoView extends JFrame implements ActionListener, Observer {
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-//        if(o instanceof Feuille) // Case devrait être générique, donc on peut l'utiliser dans la vue générique
-//        {
-//            Feuille c = (Feuille)o;
-//            feuille.
-//            
-//            if(c.isVisible() && c.isTrapped()) { // Si la case est une bombe
-//                // On perd la partie
-//                plateau.propagateExplosion();
-//            
-//            } else { // Sinon
-//                // On notifie le modèle qu'il doit mettre à jour son compteur de drapeaux
-//                plateau.updateNbMinesLeft();
-//                
-//                // Vérification que la partie est gagnée.
-//                plateau.updateGameStateIfWin();
-//            }
-//        }
-    }
-
     public void addTortue(TortueView tortue) {
         feuille.addTortue(tortue);
+    }
+
+    public void addFeuilleDessin(FeuilleDessin feuilleView) {
+        feuille = feuilleView;
+        getContentPane().add(feuille,"Center");
     }
 }

@@ -12,9 +12,18 @@ import java.util.Observable;
 public class Feuille extends Observable {
     
     private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
+    private Tortue courante;
 	
     public Feuille() {
         tortues = new ArrayList();
+        courante = new Tortue();
+        addTortue(courante);
+    }
+    
+    public Feuille(Tortue courante) {
+        tortues = new ArrayList();
+        this.courante = courante;
+        addTortue(courante);
     }
 
     public void addTortue(Tortue o) {
@@ -33,5 +42,13 @@ public class Feuille extends Observable {
 
     public ArrayList<Tortue> getTortues() {
         return tortues;
+    }
+
+    public Tortue getCourante() {
+        return courante;
+    }
+
+    public void setCourante(Tortue courante) {
+        this.courante = courante;
     }
 }
