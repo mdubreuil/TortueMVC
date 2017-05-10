@@ -33,10 +33,6 @@ public class FeuilleDessin extends JPanel implements Observer
         }
     }
 
-    public void reset() {
-        tortues.clear();
-    }
-    
     public void addTortue(TortueView o) {
         tortues.add(o);
     }
