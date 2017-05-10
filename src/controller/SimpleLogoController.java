@@ -48,16 +48,10 @@ public class SimpleLogoController implements MouseListener {
         feuilleView.addTortue(couranteView);
 
         // Add listeners
-//        courante.addObserver(couranteView);
         feuille.addObserver(feuilleView);
         
         window = new SimpleLogoView(this, feuilleView);
     }
-
-//    public void setCourante(Tortue courante) {
-//        feuille.addTortue(courante); // TODO check if not in list
-//        feuille.setCourante(courante);
-//    }
 
     public void resetCourante()
     {
