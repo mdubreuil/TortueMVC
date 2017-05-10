@@ -47,13 +47,15 @@ public class SimpleLogoView extends JFrame implements ActionListener {
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
 
-    private JTextField inputValue;
+    private JTextField inputDegree;
+    private JTextField inputNom;
     private JComboBox colorList;
+    private JComboBox listeTortues;
     
     private FeuilleDessin feuille;
 
     public JTextField getInputValue() {
-        return inputValue;
+        return inputDegree;
     }
 
     public JComboBox getColorList() {
@@ -93,23 +95,28 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
 
         toolBar.add(Box.createRigidArea(HGAP));
-        inputValue = new JTextField("45",5);
-        toolBar.add(inputValue);
+        inputDegree = new JTextField("45",5);
+        inputNom = new JTextField("Nom",10);
+        toolBar.add(inputDegree);
         addButton(toolBar, "Avancer", "Avancer 50", null);
         addButton(toolBar, "Droite", "Droite 45", null);
         addButton(toolBar, "Gauche", "Gauche 45", null);
-        addButton(toolBar, "Ajouter", "Ajouter tortue", null);
-
+        
+        toolBar.add(inputNom);
         String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
                                 "vert", "gris clair", "magenta", "orange",
                                 "gris", "rose", "jaune"};
+        String[] typeTortues = {"Tortue classique","Tortue améliorée","Tortue balle"};
 
         // Create the combo box
         toolBar.add(Box.createRigidArea(HGAP));
         JLabel colorLabel = new JLabel("   Couleur: ");
         toolBar.add(colorLabel);
         colorList = new JComboBox(colorStrings);
+        listeTortues = new JComboBox(typeTortues);
         toolBar.add(colorList);
+        toolBar.add(listeTortues);        
+        addButton(toolBar, "Ajouter", "Ajouter tortue", null);
 
         colorList.addActionListener(new ActionListener() {
             @Override
@@ -175,24 +182,24 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         if (c.equals("Avancer")) {
             System.out.println("command avancer");
             try {
-                int v = Integer.parseInt(inputValue.getText());
+                int v = Integer.parseInt(inputDegree.getText());
                 controller.avancer(v);
             } catch (NumberFormatException ex) {
-                System.err.println("ce n'est pas un nombre : " + inputValue.getText());
+                System.err.println("ce n'est pas un nombre : " + inputDegree.getText());
             }
         } else if (c.equals("Droite")) {
             try {
-                int v = Integer.parseInt(inputValue.getText());
+                int v = Integer.parseInt(inputDegree.getText());
                 controller.droite(v);
             } catch (NumberFormatException ex) {
-                System.err.println("ce n'est pas un nombre : " + inputValue.getText());
+                System.err.println("ce n'est pas un nombre : " + inputDegree.getText());
             }
         } else if (c.equals("Gauche")) {
             try {
-                int v = Integer.parseInt(inputValue.getText());
+                int v = Integer.parseInt(inputDegree.getText());
                 controller.gauche(v);
             } catch (NumberFormatException ex){
-                System.err.println("ce n'est pas un nombre : " + inputValue.getText());
+                System.err.println("ce n'est pas un nombre : " + inputDegree.getText());
             }
         } else if (c.equals("Lever")) {
             controller.leverCrayon();
