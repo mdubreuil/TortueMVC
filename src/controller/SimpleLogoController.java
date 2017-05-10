@@ -19,7 +19,6 @@ public class SimpleLogoController implements MouseListener {
 
     private static SimpleLogoView window = null;
     private Feuille feuille = null;
-    private Tortue courante = null;
     private FeuilleDessin feuilleView = null;
     private TortueView couranteView = null;
 
@@ -38,7 +37,7 @@ public class SimpleLogoController implements MouseListener {
     
     public SimpleLogoController() {
         // Modèle
-        courante = new Tortue();
+        Tortue courante = new Tortue();
         feuille = new Feuille(courante);
 
         // Views
@@ -49,6 +48,7 @@ public class SimpleLogoController implements MouseListener {
 
         // Add listeners
         feuille.addObserver(feuilleView);
+        courante.addObserver(feuilleView);
         
         window = new SimpleLogoView(this, feuilleView);
     }
@@ -116,26 +116,25 @@ public class SimpleLogoController implements MouseListener {
     protected void setCourante(Tortue tortue)
     {
         feuille.addTortue(tortue);
-        feuille.setCourante(courante);
+        feuille.setCourante(tortue);
     }
     
     public void addNewTortue()
     {
-        // Model
         Tortue t = new Tortue();
-        // View
+        t.addObserver(feuilleView);
+        
         TortueView tView = new TortueView(t);
         feuilleView.addTortue(tView);
-        
-        
-        this.setCourante(t);
+
+        setCourante(t);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = e.getX(), y = e.getY();
-        courante = feuille.getTortue(x, y);
-        feuille.setCourante(courante);
+        Tortue tortue = feuille.getTortue(x, y);
+        feuille.setCourante(tortue);
     }
 
     @Override

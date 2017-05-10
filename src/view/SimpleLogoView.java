@@ -55,10 +55,6 @@ public class SimpleLogoView extends JFrame implements ActionListener {
     public JTextField getInputValue() {
         return inputValue;
     }
-    
-//    public String getInputValue() {
-//        return inputValue.getText();
-//    }
 
     public JComboBox getColorList() {
         return colorList;
@@ -166,20 +162,9 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         
         // la feuille de dessin
         getContentPane().add(feuille, "Center");
-//        drawFeuille();
-//        controller.addNewFeuille();
 
         pack();
         setVisible(true);
-    }
-    
-    
-    protected void drawFeuille() {
-        feuille = new FeuilleDessin(); //500, 400);
-//        feuille.setBackground(Color.white);
-//        feuille.setSize(new Dimension(600,400));
-//        feuille.setPreferredSize(new Dimension(600,400));
-        getContentPane().add(feuille,"Center");
     }
 
     /** la gestion des actions des boutons
