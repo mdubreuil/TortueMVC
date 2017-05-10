@@ -200,7 +200,8 @@ public class SimpleLogoView extends JFrame implements ActionListener {
             controller.baisserCrayon();
         } else if (c.equals("Ajouter")) {
             int n = colorList.getSelectedIndex();
-            controller.addNewTortue(n);
+            controller.addNewTortue();
+            controller.changeColor(n);
         } else if (c.equals("Proc1")) { // actions des boutons du bas
             controller.proc1();
         } else if (c.equals("Proc2")) {
