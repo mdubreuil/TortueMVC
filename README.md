@@ -1,4 +1,5 @@
-# TortueMVC
-TP4 du module d'ISI3 consacré aux Design Patterns
+# TurtleSoccer
+Projet du module d'ISI3 consacré aux Design Patterns
 
-* Refactorer les classes du package logoInit en MVC
+* Proposer un jeu de balles
+* Proposer un jeu de football
