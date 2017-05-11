@@ -37,7 +37,11 @@ public class TortueAmelioree extends Tortue {
     public void resetTortues() {
         this.connues.clear();
     }
-    
+
+    public List<Tortue> getConnues() {
+        return connues;
+    }
+
     public double getDistanceEuclidienne(Tortue tortue) {
         return Math.sqrt(Math.pow(this.getX() - tortue.getX(), 2) + Math.pow(this.getY() - tortue.getY(), 2));
     }
