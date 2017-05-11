@@ -99,8 +99,8 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         inputNom = new JTextField("Nom",10);
         toolBar.add(inputDegree);
         addButton(toolBar, "Avancer", "Avancer 50", null);
-        addButton(toolBar, "Droite", "Droite 45", null);
         addButton(toolBar, "Gauche", "Gauche 45", null);
+        addButton(toolBar, "Droite", "Droite 45", null);
         
         toolBar.add(inputNom);
         String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
@@ -139,8 +139,8 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         JMenu menuCommandes=new JMenu("Commandes"); // on installe le premier menu
         menubar.add(menuCommandes);
         addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
-        addMenuItem(menuCommandes, "Droite", "Droite", -1);
         addMenuItem(menuCommandes, "Gauche", "Gauche", -1);
+        addMenuItem(menuCommandes, "Droite", "Droite", -1);
         addMenuItem(menuCommandes, "Ajouter", "Ajouter une tortue", -1);
 
         JMenu menuHelp=new JMenu("Aide"); // on installe le premier menu
@@ -201,7 +201,8 @@ public class SimpleLogoView extends JFrame implements ActionListener {
                     controller.addNewTortueAmelioree();
                     System.out.println(inputNom.getText() + " will be created later.");
                     break;
-                case 2 : System.out.println("Not implemented yet 2.");
+                case 2 : 
+                    controller.addNewTortueBalle();
                     break;
                 default : controller.addNewTortueClassique();               
                 

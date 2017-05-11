@@ -147,8 +147,7 @@ public class Tortue extends Observable {
     }
     
     public void setColor(int n) {
-        System.out.println("changing color");
-        couleur = n;
+        this.couleur = n;
         this.setChanged();
         this.notifyObservers();
     }

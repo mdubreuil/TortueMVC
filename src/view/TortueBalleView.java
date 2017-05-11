@@ -21,6 +21,10 @@ public class TortueBalleView extends TortueView {
 
         int radius = 5;
         TortueBalle t = (TortueBalle) tortue;
-        graphics.drawOval(t.getFollow().getX() - radius, t.getFollow().getY() - radius, 2 * radius, 2 * radius);
+        //if(t.getFollow() != null){
+           //graphics.fillOval(t.getFollow().getX() - radius, t.getFollow().getY() - radius, 2 * radius, 2 * radius);
+        //} else{
+            graphics.fillOval(t.getX() - radius, t.getY() - radius, 2 * radius, 2 * radius);
+        //}
     }
 }
