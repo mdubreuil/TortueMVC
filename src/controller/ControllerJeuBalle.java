@@ -1,14 +1,13 @@
-
 package controller;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
-import model.Feuille;
+import model.JeuBalle;
 import model.Tortue;
 import model.TortueBalle;
 import view.TortueBalleView;
-import model.TortueAmelioree;
+import model.TortueJoueuse;
 import view.FeuilleDessin;
 import view.SimpleLogoView;
 import view.TortueAmelioreeView;
@@ -19,10 +18,11 @@ import view.TortueView;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class SimpleLogoController implements MouseListener {
+
+public class ControllerJeuBalle extends ControllerJeu implements MouseListener {
 
     private static SimpleLogoView window = null;
-    private Feuille feuille = null;
+    private JeuBalle feuille = null;
     private FeuilleDessin feuilleView = null;
     private TortueView couranteView = null;
 
@@ -33,16 +33,15 @@ public class SimpleLogoController implements MouseListener {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
-                SimpleLogoController controller = new SimpleLogoController();
-//                controller.addListeners();
+                ControllerJeuBalle controller = new ControllerJeuBalle();
             }
         });
     }
     
-    public SimpleLogoController() {
+    public ControllerJeuBalle() {
         // Modèle
         Tortue courante = new Tortue();
-        feuille = new Feuille(courante);
+        feuille = new JeuBalle(courante);
 
         // Views
         feuilleView = new FeuilleDessin();
@@ -134,13 +133,13 @@ public class SimpleLogoController implements MouseListener {
     
     public void addNewTortueAmelioree(String name)
     {
-        TortueAmelioree t = new TortueAmelioree(name);
+        TortueJoueuse t = new TortueJoueuse(name);
 
         for (Tortue tortue : feuille.getTortues()) {
             t.addTortue(tortue);
             
-            if (tortue instanceof TortueAmelioree) {
-                ((TortueAmelioree)tortue).addTortue(t);
+            if (tortue instanceof TortueJoueuse) {
+                ((TortueJoueuse)tortue).addTortue(t);
             }
         }
         

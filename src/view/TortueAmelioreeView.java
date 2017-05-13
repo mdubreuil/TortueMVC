@@ -2,7 +2,7 @@
 package view;
 
 import java.awt.Graphics;
-import model.TortueAmelioree;
+import model.TortueJoueuse;
 
 /**
  *
@@ -11,7 +11,7 @@ import model.TortueAmelioree;
  */
 public class TortueAmelioreeView extends TortueView {
     
-    public TortueAmelioreeView(TortueAmelioree tortue) {
+    public TortueAmelioreeView(TortueJoueuse tortue) {
         super(tortue);
     }
 
@@ -21,6 +21,6 @@ public class TortueAmelioreeView extends TortueView {
         
         if (graphics == null) return;
         
-        graphics.drawString(((TortueAmelioree)tortue).getName(), tortue.getX() + 10, tortue.getY() + 10);
+        graphics.drawString(((TortueJoueuse)tortue).getName(), tortue.getX() + 10, tortue.getY() + 10);
     }
 }

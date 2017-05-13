@@ -17,13 +17,11 @@ import model.Tortue;
  */
 public class TortueView extends JComponent
 {    
-    protected ArrayList<Segment> listSegments; // Trace de la tortue
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
     protected Tortue tortue;
 
     public TortueView(Tortue tortue) {
-        this.listSegments = new ArrayList();
         this.tortue = tortue;   
     }
     
@@ -31,19 +29,8 @@ public class TortueView extends JComponent
         return tortue;
     }
 
-    public void reset() {
-        listSegments.clear();
-    }
-
     public void drawTurtle(Graphics graphics) {
         if (graphics == null) return;
-
-        // Dessine les segments<
-        for (Iterator it = listSegments.iterator(); it.hasNext();) {
-            Segment seg = (Segment) it.next();
-            seg.drawSegment(graphics);
-        }
-
         //Calcule les 3 coins du triangle a partir de
         // la position de la tortue p
         Point p = new Point(tortue.getX(), tortue.getY());

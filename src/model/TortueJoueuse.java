@@ -9,16 +9,16 @@ import java.util.List;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class TortueAmelioree extends Tortue {
+public class TortueJoueuse extends Tortue {
     protected String name;
     protected List<Tortue> connues;
     
-    public TortueAmelioree(String name) {
+    public TortueJoueuse(String name) {
         this.name = name;
         this.connues = new ArrayList();
     }
 
-    public TortueAmelioree() {
+    public TortueJoueuse() {
         this("Unknown");
     }
 
@@ -50,8 +50,8 @@ public class TortueAmelioree extends Tortue {
     public void avancer(int dist) {
         super.avancer(dist);
         for (Tortue tortue : connues) {
-            if (tortue instanceof TortueAmelioree && this.getDistanceEuclidienne(tortue) < 15) {
-                System.out.println("> " + name + " : Salut " + ((TortueAmelioree)tortue).getName());
+            if (tortue instanceof TortueJoueuse && this.getDistanceEuclidienne(tortue) < 15) {
+                System.out.println("> " + name + " : Salut " + ((TortueJoueuse)tortue).getName());
                 tortue.avancer(dist);
             }
         }

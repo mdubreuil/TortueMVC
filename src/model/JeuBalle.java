@@ -2,25 +2,24 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  *
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class Feuille extends Observable {
+public class JeuBalle extends Jeu {
     
     private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
     private Tortue courante;
 	
-    public Feuille() {
+    public JeuBalle() {
         tortues = new ArrayList();
         courante = new Tortue();
         addTortue(courante);
     }
     
-    public Feuille(Tortue courante) {
+    public JeuBalle(Tortue courante) {
         tortues = new ArrayList();
         this.courante = courante;
         addTortue(courante);

@@ -1,7 +1,7 @@
 
 package view;
 
-import controller.SimpleLogoController;
+import controller.ControllerJeuBalle;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Event;
@@ -42,7 +42,7 @@ public class SimpleLogoView extends JFrame implements ActionListener {
      * - Le modèle ne connait ni la vue, ni le controlleur
      * Exemple MVC : http://baptiste-wicht.developpez.com/tutoriels/conception/mvc/
      */
-    private final SimpleLogoController controller;
+    private final ControllerJeuBalle controller;
 
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
@@ -66,7 +66,7 @@ public class SimpleLogoView extends JFrame implements ActionListener {
         return feuille;
     }
 
-    public SimpleLogoView(SimpleLogoController controller, FeuilleDessin feuille) {
+    public SimpleLogoView(ControllerJeuBalle controller, FeuilleDessin feuille) {
         super("un logo tout simple");
         this.controller = controller;
         this.feuille = feuille;
