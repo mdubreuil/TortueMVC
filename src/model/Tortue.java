@@ -1,35 +1,32 @@
-
 package model;
 
 import java.util.Observable;
 
 /**
  *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * @author Mélanie DUBREUIL 4APP
+ * @author Ophélie EOUZAN 4APP
  */
+
 public /*abstract*/ class Tortue extends Observable {
 
     protected static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
     protected int x = 0, y = 0;
     protected int direction = -90;
-    protected boolean crayon = true;
     protected int couleur = 0;
-    protected Equipe equipe;
-    protected Etat etat;
+    protected Strategie etat;
 
     public Tortue() {
-        reset();
+        reinitialiser();
         x = 500/2;
         y = 400/2;
     }
 
-    public void reset() {
+    public void reinitialiser() {
         x = 0;
         y = 0;
         direction = -90;
         couleur = 0;
-        crayon = true;
         this.setChanged();
         this.notifyObservers();
     }
@@ -44,19 +41,6 @@ public /*abstract*/ class Tortue extends Observable {
     public void avancer(int dist) {
         int newX = (int) Math.round(x+dist*Math.cos(ratioDegRad * direction));
         int newY = (int) Math.round(y+dist*Math.sin(ratioDegRad * direction));
-
-//		if (crayon==true) {
-//			Segment seg = new Segment();
-//			
-//			seg.ptStart.x = x;
-//			seg.ptStart.y = y;
-//			seg.ptEnd.x = newX;
-//			seg.ptEnd.y = newY;
-//			seg.color = decodeColor(coul);
-//	
-//			listSegments.add(seg);
-//		}
-
         x = newX;
         y = newY;
         this.setChanged();
@@ -75,18 +59,6 @@ public /*abstract*/ class Tortue extends Observable {
         this.notifyObservers();
     }
 
-    public void baisserCrayon() {
-        crayon = true;
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void leverCrayon() {
-        crayon = false;
-        this.setChanged();
-        this.notifyObservers();
-    }
-
     public void couleur(int n) {
         couleur = n % 12;
         this.setChanged();
@@ -98,32 +70,7 @@ public /*abstract*/ class Tortue extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
-
-    /** quelques classiques */
-
-    public void carre() {
-        for (int i=0;i<4;i++) {
-            avancer(100);
-            droite(90);
-        }
-    }
-
-    public void poly(int n, int a) {
-        for (int j=0;j<a;j++) {
-            avancer(n);
-            droite(360/a);
-        }
-    }
-
-    public void spiral(int n, int k, int a) {
-        for (int i = 0; i < k; i++) {
-            couleur(couleur+1);
-            avancer(n);
-            droite(360/a);
-            n = n+1;
-        }
-    }
-
+    
     public static double getRatioDegRad() {
         return ratioDegRad;
     }
@@ -140,21 +87,13 @@ public /*abstract*/ class Tortue extends Observable {
         return direction;
     }
 
-    public boolean isCrayon() {
-        return crayon;
-    }
-
     public int getCouleur() {
         return couleur;
     }
     
-    public void setColor(int n) {
+    public void setCouleur(int n) {
         this.couleur = n;
         this.setChanged();
         this.notifyObservers();
-    }
-
-    public int getColor() {
-        return couleur;
     }
 }

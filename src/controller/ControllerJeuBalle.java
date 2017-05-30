@@ -3,28 +3,22 @@ package controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
-import model.JeuBalle;
-import model.Tortue;
-import model.TortueBalle;
-import view.TortueBalleView;
-import model.TortueJoueuse;
-import view.FeuilleDessin;
-import view.SimpleLogoView;
-import view.TortueAmelioreeView;
-import view.TortueView;
+import model.*;
+import view.*;
 
 /**
  * Class Main = Controlleur
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * @author Mélanie DUBREUIL 4APP
+ * @author Ophélie EOUZAN 4APP
  */
 
 public class ControllerJeuBalle extends ControllerJeu implements MouseListener {
 
-    private static SimpleLogoView window = null;
-    private JeuBalle feuille = null;
-    private FeuilleDessin feuilleView = null;
-    private TortueView couranteView = null;
+    private static TurtleSoccer fenetre = null;
+    private JeuBalle jeuBalle = null;
+    private VueStrategie strategie = null;
+    private VueJeuBalle vueJeuBalle = null;
+    private VueTortue tortueCourante = null;
 
     /**
      * @param args
@@ -41,31 +35,32 @@ public class ControllerJeuBalle extends ControllerJeu implements MouseListener {
     public ControllerJeuBalle() {
         // Modèle
         Tortue courante = new Tortue();
-        feuille = new JeuBalle(courante);
+        jeuBalle = new JeuBalle(courante);
 
         // Views
-        feuilleView = new FeuilleDessin();
-        feuilleView.addMouseListener(this);
-        couranteView = new TortueView(courante);
-        feuilleView.addTortue(couranteView);
+        strategie = new VueStrategie();
+        vueJeuBalle = new VueJeuBalle();
+        vueJeuBalle.addMouseListener(this);
+        tortueCourante = new VueTortue(courante);
+        vueJeuBalle.ajouterTortues(tortueCourante);
 
         // Add listeners
-        feuille.addObserver(feuilleView);
-        courante.addObserver(feuilleView);
+        jeuBalle.addObserver(vueJeuBalle);
+        courante.addObserver(vueJeuBalle);
         
-        window = new SimpleLogoView(this, feuilleView);
+        fenetre = new TurtleSoccer(this, vueJeuBalle, strategie);
     }
 
-    public void resetCourante()
+    public void reinitialiserTortueCourante()
     {
-        getCourante().reset();
+        getCourante().reinitialiser();
     }
 
-    public void changeColor(int n) {
-        getCourante().setColor(n);
+    public void changerCouleur(int n) {
+        getCourante().setCouleur(n);
     }
     
-    public void changePosition(int x, int y) {
+    public void changerPosition(int x, int y) {
         getCourante().setPosition(x, y);
     }
     
@@ -85,84 +80,63 @@ public class ControllerJeuBalle extends ControllerJeu implements MouseListener {
         getCourante().gauche(v);
     }
     
-    public void leverCrayon() {
-        getCourante().leverCrayon();
-    }
-    
-    public void baisserCrayon() {
-        getCourante().baisserCrayon();
-    }
-    
-    /** les procedures Logo qui combine plusieurs commandes..*/
-    public void proc1() {
-        getCourante().carre();
-    }
-
-    public void proc2() {
-        getCourante().poly(60,8);
-    }
-
-    public void proc3() {
-        getCourante().spiral(50,40,6);
-    }
-
-    public void resetFeuille() {
-        feuille.reset();
+    public void reinitialiserJeu() {
+        jeuBalle.reinitialiser();
     }
     
     // Temporary while no tortueController
     protected Tortue getCourante()
     {
-        return feuille.getCourante();
+        return jeuBalle.getTortueCourante();
     }
     
     protected void setCourante(Tortue tortue)
     {
-        feuille.addTortue(tortue);
-        feuille.setCourante(tortue);
+        jeuBalle.ajouterTortue(tortue);
+        jeuBalle.setTortueCourante(tortue);
     }
     
-    public void addNewTortueClassique()
+    public void ajouterTortue()
     {
         Tortue t = new Tortue();
-        t.addObserver(feuilleView);        
-        TortueView tView = new TortueView(t);
-        feuilleView.addTortue(tView);
+        t.addObserver(vueJeuBalle);        
+        VueTortue tView = new VueTortue(t);
+        vueJeuBalle.ajouterTortues(tView);
         setCourante(t);
     }
     
-    public void addNewTortueAmelioree(String name)
+    public void ajouterTortueJoueuse(String name)
     {
         TortueJoueuse t = new TortueJoueuse(name);
 
-        for (Tortue tortue : feuille.getTortues()) {
-            t.addTortue(tortue);
+        for (Tortue tortue : jeuBalle.getTortues()) {
+            t.ajouterTortue(tortue);
             
             if (tortue instanceof TortueJoueuse) {
-                ((TortueJoueuse)tortue).addTortue(t);
+                ((TortueJoueuse)tortue).ajouterTortue(t);
             }
         }
         
-        t.addObserver(feuilleView);
-        TortueView tView = new TortueAmelioreeView(t);
-        feuilleView.addTortue(tView);
+        t.addObserver(vueJeuBalle);
+        VueTortue tView = new VueTortueJoueuse(t);
+        vueJeuBalle.ajouterTortues(tView);
         setCourante(t);
     }
     
-    public void addNewTortueBalle()
+    public void ajouterTortueBalle()
     {
         TortueBalle t = new TortueBalle();
-        t.addObserver(feuilleView);        
-        TortueBalleView tView = new TortueBalleView(t);
-        feuilleView.addTortue(tView);
+        t.addObserver(vueJeuBalle);        
+        VueTortueBalle tView = new VueTortueBalle(t);
+        vueJeuBalle.ajouterTortues(tView);
         setCourante(t);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = e.getX(), y = e.getY();
-        Tortue tortue = feuille.getTortue(x, y);
-        feuille.setCourante(tortue);
+        Tortue tortue = jeuBalle.getTortue(x, y);
+        jeuBalle.setTortueCourante(tortue);
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package model;
 
 import java.util.ArrayList;
@@ -6,40 +5,42 @@ import java.util.List;
 
 /**
  *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * @author Mélanie DUBREUIL 4APP
+ * @author Ophélie EOUZAN 4APP
+ * 
  */
+
 public class TortueJoueuse extends Tortue {
-    protected String name;
-    protected List<Tortue> connues;
+    protected String nom;
+    protected List<Tortue> tortuesConnues;
     
     public TortueJoueuse(String name) {
-        this.name = name;
-        this.connues = new ArrayList();
+        this.nom = name;
+        this.tortuesConnues = new ArrayList();
     }
 
     public TortueJoueuse() {
         this("Unknown");
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return nom;
     }
     
-    public void addTortue(Tortue tortue) {
-        this.connues.add(tortue);
+    public void ajouterTortue(Tortue tortue) {
+        this.tortuesConnues.add(tortue);
     }
     
-    public void removeTortue(Tortue tortue) {
-        this.connues.remove(tortue);
+    public void enleverTortue(Tortue tortue) {
+        this.tortuesConnues.remove(tortue);
     }
     
-    public void resetTortues() {
-        this.connues.clear();
+    public void reinitialiserTortuesConnues() {
+        this.tortuesConnues.clear();
     }
 
-    public List<Tortue> getConnues() {
-        return connues;
+    public List<Tortue> getTortuesConnues() {
+        return tortuesConnues;
     }
 
     public double getDistanceEuclidienne(Tortue tortue) {
@@ -49,9 +50,9 @@ public class TortueJoueuse extends Tortue {
     @Override
     public void avancer(int dist) {
         super.avancer(dist);
-        for (Tortue tortue : connues) {
+        for (Tortue tortue : tortuesConnues) {
             if (tortue instanceof TortueJoueuse && this.getDistanceEuclidienne(tortue) < 15) {
-                System.out.println("> " + name + " : Salut " + ((TortueJoueuse)tortue).getName());
+                System.out.println("> " + nom + " : Salut " + ((TortueJoueuse)tortue).getNom());
                 tortue.avancer(dist);
             }
         }

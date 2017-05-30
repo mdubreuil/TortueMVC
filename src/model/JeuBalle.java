@@ -1,4 +1,3 @@
-
 package model;
 
 import java.util.ArrayList;
@@ -8,21 +7,22 @@ import java.util.ArrayList;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
+
 public class JeuBalle extends Jeu {
     
     private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
-    private Tortue courante;
+    private Tortue tortueCourante;
 	
     public JeuBalle() {
         tortues = new ArrayList();
-        courante = new Tortue();
-        addTortue(courante);
+        tortueCourante = new Tortue();
+        ajouterTortue(tortueCourante);
     }
     
     public JeuBalle(Tortue courante) {
         tortues = new ArrayList();
-        this.courante = courante;
-        addTortue(courante);
+        this.tortueCourante = courante;
+        ajouterTortue(courante);
     }
     
     public Tortue getTortue(int x, int y){
@@ -31,10 +31,10 @@ public class JeuBalle extends Jeu {
                 return t;
             }
         }
-        return courante;
+        return tortueCourante;
     }
 
-    public void addTortue(Tortue o) {
+    public void ajouterTortue(Tortue o) {
         if (!tortues.contains(o)) {
             tortues.add(o);
             this.setChanged();
@@ -42,10 +42,7 @@ public class JeuBalle extends Jeu {
         }
     }
 
-    public void reset() {
-//        for (Tortue t : tortues) {
-//            t.reset();
-//        }
+    public void reinitialiser() {
         tortues.clear();
         this.setChanged();
         this.notifyObservers();
@@ -55,11 +52,11 @@ public class JeuBalle extends Jeu {
         return tortues;
     }
 
-    public Tortue getCourante() {
-        return courante;
+    public Tortue getTortueCourante() {
+        return tortueCourante;
     }
 
-    public void setCourante(Tortue courante) {
-        this.courante = courante;
+    public void setTortueCourante(Tortue courante) {
+        this.tortueCourante = courante;
     }
 }

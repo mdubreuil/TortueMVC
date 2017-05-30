@@ -1,19 +1,19 @@
-
 package model;
 
 /**
  *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * @author Mélanie DUBREUIL 4APP
+ * @author Ophélie EOUZAN 4APP
  */
-public class TortueBalle extends Tortue {
-    protected Tortue follow;
 
-    public Tortue getFollow() {
-        return follow;
+public class TortueBalle extends Tortue {
+    protected Tortue tortueSuivie;
+
+    public Tortue getTortueSuivie() {
+        return tortueSuivie;
     }
 
-    public void setFollow(Tortue follow) {
-        this.follow = follow;
+    public void setTortueSuivie(Tortue suivie) {
+        this.tortueSuivie = suivie;
     }
 }
