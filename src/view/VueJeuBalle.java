@@ -18,11 +18,13 @@ import model.JeuBalle;
 public class VueJeuBalle extends JPanel implements Observer
 {
     protected List<VueTortue> tortues; // la liste des sous-vues
+    public static int width = 600;
+    public static int height = 400;
 	
     public VueJeuBalle() {
         setBackground(Color.white);
-        setSize(new Dimension(600,400));
-        setPreferredSize(new Dimension(600,400));
+        setSize(new Dimension(VueJeuBalle.width, VueJeuBalle.height));
+        setPreferredSize(new Dimension(VueJeuBalle.width, VueJeuBalle.height));
         
         tortues = new ArrayList();
     }

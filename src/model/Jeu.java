@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -10,17 +11,15 @@ import java.util.Observable;
 
 public abstract class Jeu extends Observable {
 
-    private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
-    private Tortue tortueCourante;
+    private List<Tortue> tortues; // la liste des tortues enregistrees
+    private Tortue tortueCourante = null;
 
     public Jeu() {
         tortues = new ArrayList();
-        tortueCourante = new TortueJoueuse();
-        ajouterTortue(tortueCourante);
     }
 
     public Jeu(Tortue courante) {
-        tortues = new ArrayList();
+        this();
         tortueCourante = courante;
         ajouterTortue(courante);
     }
@@ -48,7 +47,7 @@ public abstract class Jeu extends Observable {
         this.notifyObservers();
     }
 
-    public ArrayList<Tortue> getTortues() {
+    public List<Tortue> getTortues() {
         return tortues;
     }
 

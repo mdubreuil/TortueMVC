@@ -7,7 +7,17 @@ package model;
  */
 
 public class TortueBalle extends Tortue {
-    protected Tortue tortueSuivie;
+
+    protected Tortue tortueSuivie = null;
+
+    public TortueBalle() {
+        super();
+    }
+
+    public TortueBalle(Tortue tortueSuivie) {
+        this();
+        setTortueSuivie(tortueSuivie);
+    }
 
     public Tortue getTortueSuivie() {
         return tortueSuivie;
@@ -15,5 +25,9 @@ public class TortueBalle extends Tortue {
 
     public void setTortueSuivie(Tortue suivie) {
         this.tortueSuivie = suivie;
+        this.x = suivie.getX();
+        this.y = suivie.getY();
+        this.setChanged();
+        this.notifyObservers();
     }
 }

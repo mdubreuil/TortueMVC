@@ -2,7 +2,6 @@
 package view;
 
 import controller.ControllerJeu;
-import controller.ControllerJeuBalle;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Event;
@@ -25,7 +24,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 

@@ -1,13 +1,11 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 import model.Tortue;
 
 /**

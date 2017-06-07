@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Observable;
+import view.VueJeuBalle;
 
 /**
  *
@@ -14,12 +15,11 @@ public abstract class Tortue extends Observable {
     protected int x = 0, y = 0;
     protected int direction = -90;
     protected int couleur = 0;
-    
 
     public Tortue() {
         reinitialiser();
-        x = 500/2;
-        y = 400/2;
+        x = VueJeuBalle.width/2; // TODO remove reference by choosing position before calling constructor
+        y = VueJeuBalle.height/2;
     }
 
     public void reinitialiser() {

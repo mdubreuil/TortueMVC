@@ -2,6 +2,7 @@
 package factory;
 
 import controller.ControllerJeu;
+import java.util.Random;
 import model.Jeu;
 import model.Tortue;
 import model.TortueJoueuse;
@@ -16,17 +17,26 @@ import view.VueTortueJoueuse;
  */
 public class TortueJoueuseFactory implements TortueFactory {
 
+    private boolean random = false;
+
+    public TortueJoueuseFactory() {
+    }
+
+    public TortueJoueuseFactory(boolean random) {
+        this.random = random;
+    }
+
     @Override
     public Tortue ajouterNouvelleTortue(ControllerJeu controller) {
         VueJeu fenetre = controller.getVueFenetre();
         VueJeuBalle vueFeuille = fenetre.getVueTerrain();
         Jeu terrain = controller.getJeu();
-        
+
         TortueJoueuse tortue = new TortueJoueuse(/*fenetre.getTortueName()*/); // TODO change
         tortue.addObserver(vueFeuille);
         VueTortue tView = new VueTortueJoueuse(tortue);
         vueFeuille.ajouterTortues(tView);
-        
+
         for (Tortue t : terrain.getTortues()) {
             tortue.ajouterTortue(t);
             
@@ -34,7 +44,15 @@ public class TortueJoueuseFactory implements TortueFactory {
                 ((TortueJoueuse)t).ajouterTortue(tortue);
             }
         }
-        
+
+        if (random) {
+            // Random position
+            Random rand = new Random();
+            int x = rand.nextInt(VueJeuBalle.width);
+            int y = rand.nextInt(VueJeuBalle.height);
+            tortue.setPosition(x, y);
+        }
+
         return tortue;
     }
 }

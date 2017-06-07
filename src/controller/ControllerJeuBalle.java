@@ -1,8 +1,10 @@
 package controller;
 
+import factory.TortueBalleFactory;
+import factory.TortueFactory;
+import factory.TortueJoueuseFactory;
 import javax.swing.SwingUtilities;
 import model.*;
-import view.*;
 
 /**
  * Class Main = Controlleur
@@ -20,26 +22,20 @@ public class ControllerJeuBalle extends ControllerJeu {
             @Override
             public void run(){
                 ControllerJeuBalle controller = new ControllerJeuBalle(/*new TortueJoueuseFactory()*/);
+                controller.initialisation();
             }
         });
     }
 
-    public ControllerJeuBalle(/*TortueFactory factory*/) {
-        super();
-        
-        Tortue courante = new TortueJoueuse();
-        jeu = new JeuBalle(courante);
-        
-        // Views
-        vueTerrain = new VueJeuBalle();
-        vueTerrain.addMouseListener(this);
-        VueTortue vueTortueCourante = new VueTortueJoueuse((TortueJoueuse)courante);
-        vueTerrain.ajouterTortues(vueTortueCourante);
+    @Override
+    public void initialisation() {
+        TortueFactory factoryJoueuse = new TortueJoueuseFactory(true);
+        int nbJoueurs = ((JeuBalle) jeu).getNbJoueurs();
+        for (int i = 0; i < nbJoueurs; i++) {
+            Tortue tortue = factoryJoueuse.ajouterNouvelleTortue(this);
+            this.ajouterTortue(tortue);
+        }
 
-        // Add listeners
-        jeu.addObserver(vueTerrain);
-        courante.addObserver(vueTerrain);
-        
-        vueFenetre = new VueJeu(this, vueTerrain, vueStrategie);
+        this.ajouterTortue(new TortueBalleFactory());
     }
 }

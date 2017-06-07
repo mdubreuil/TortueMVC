@@ -4,6 +4,7 @@ import factory.TortueFactory;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.Jeu;
+import model.JeuBalle;
 import model.Tortue;
 import view.VueJeu;
 import view.VueJeuBalle;
@@ -24,8 +25,20 @@ public abstract class ControllerJeu implements MouseListener {
     // Model    
     protected Jeu jeu = null;
     
+    abstract public void initialisation();
+    
     public ControllerJeu() {
         vueStrategie = new VueStrategie();
+        jeu = new JeuBalle();
+        
+        // Views
+        vueTerrain = new VueJeuBalle();
+        vueTerrain.addMouseListener(this);
+
+        // Add listeners
+        jeu.addObserver(vueTerrain);
+
+        vueFenetre = new VueJeu(this, vueTerrain, vueStrategie);
     }
 
     public VueJeu getVueFenetre() {
@@ -83,7 +96,12 @@ public abstract class ControllerJeu implements MouseListener {
     {
         Tortue tortue = factory.ajouterNouvelleTortue(this);
         jeu.ajouterTortue(tortue);
-        setCourante(tortue);
+//        setCourante(tortue);
+    }
+
+    public void ajouterTortue(Tortue tortue) {
+        jeu.ajouterTortue(tortue);
+//        setCourante(tortue);
     }
 
     @Override
