@@ -8,13 +8,13 @@ import java.util.Observable;
  * @author Ophélie EOUZAN 4APP
  */
 
-public /*abstract*/ class Tortue extends Observable {
+public abstract class Tortue extends Observable {
 
     protected static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
     protected int x = 0, y = 0;
     protected int direction = -90;
     protected int couleur = 0;
-    protected Strategie etat;
+    
 
     public Tortue() {
         reinitialiser();

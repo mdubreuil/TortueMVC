@@ -34,7 +34,7 @@ import javax.swing.KeyStroke;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class TurtleSoccer extends JFrame implements ActionListener {
+public class VueJeu extends JFrame implements ActionListener {
     /**
      * - La vue peut faire des requêtes d'état sur le modèle, signifie qu'elle peut avoir une dépendance vers le modèle. Slide 4/10 rappel MVC
      * - Chaque vue est associée à un controlleur, et chaque controleur est associé à une vue (écouteur d'évènements)
@@ -42,24 +42,24 @@ public class TurtleSoccer extends JFrame implements ActionListener {
      * - Le modèle ne connait ni la vue, ni le controlleur
      * Exemple MVC : http://baptiste-wicht.developpez.com/tutoriels/conception/mvc/
      */
-    private final ControllerJeuBalle controller;
+    private final ControllerJeu controller;
 
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
     private JComboBox listeTortues;
     
-    private VueJeuBalle jeuBalle;
-    private VueStrategie strategie;
+    private VueJeuBalle vueTerrain;
+    private VueStrategie vueStrategie;
     
-    public VueJeuBalle getFeuille() {
-        return jeuBalle;
+    public VueJeuBalle getVueTerrain() {
+        return vueTerrain;
     }
 
-    public TurtleSoccer(ControllerJeuBalle controller, VueJeuBalle feuille, VueStrategie strategie) {
+    public VueJeu(ControllerJeu controller, VueJeuBalle vueTerrain, VueStrategie vueStrategie) {
         super("TurtleSoccer");
         this.controller = controller;
-        this.jeuBalle = feuille;
-        this.strategie = strategie;
+        this.vueTerrain = vueTerrain;
+        this.vueStrategie = vueStrategie;
         
         this.initialisationFenetreJeu();
 
@@ -108,8 +108,8 @@ public class TurtleSoccer extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         // la feuille de dessin
-        getContentPane().add(jeuBalle, "Center");
-        getContentPane().add(strategie, "South");
+        getContentPane().add(vueTerrain, "Center");
+        getContentPane().add(vueStrategie, "South");
 
         pack();
         setVisible(true);
@@ -135,14 +135,14 @@ public class TurtleSoccer extends JFrame implements ActionListener {
         } else if (c.equals("Quitter")) {
             controller.quitter();
         }
-        jeuBalle.repaint();
+        vueTerrain.repaint();
     }
 
     // efface tout et reinitialise la feuille
     public void effacer() {
         controller.reinitialiserJeu();
         // Replace la tortue au centre
-        Dimension size = jeuBalle.getSize();
+        Dimension size = vueTerrain.getSize();
         controller.changerPosition(size.width/2, size.height/2);
     }
 
@@ -185,11 +185,11 @@ public class TurtleSoccer extends JFrame implements ActionListener {
     }
 
     public void ajouterTortue(VueTortue tortue) {
-        jeuBalle.ajouterTortues(tortue);
+        vueTerrain.ajouterTortues(tortue);
     }
 
-    public void ajouterFeuilleDessin(VueJeuBalle feuilleView) {
-        jeuBalle = feuilleView;
-        getContentPane().add(jeuBalle,"Center");
+    public void ajouterFeuilleDessin(VueJeuBalle vueTerrain) {
+        this.vueTerrain = vueTerrain;
+        getContentPane().add(this.vueTerrain, "Center");
     }
 }
