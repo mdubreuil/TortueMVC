@@ -51,6 +51,11 @@ public class TortueJoueuseFactory implements TortueFactory {
             int x = rand.nextInt(VueJeuBalle.width);
             int y = rand.nextInt(VueJeuBalle.height);
             tortue.setPosition(x, y);
+            
+            int nbRotation = rand.nextInt(8) + 1;
+            for (int i = 0; i < nbRotation; i++) {
+                tortue.droite(45);
+            }
         }
 
         return tortue;
