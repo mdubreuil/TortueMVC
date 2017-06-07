@@ -25,6 +25,8 @@ public class VueJeuBalle extends JPanel implements Observer
         setBackground(Color.white);
         setSize(new Dimension(VueJeuBalle.width, VueJeuBalle.height));
         setPreferredSize(new Dimension(VueJeuBalle.width, VueJeuBalle.height));
+        setFocusable(true);
+        grabFocus();
         
         tortues = new ArrayList();
     }

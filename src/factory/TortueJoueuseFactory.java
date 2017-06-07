@@ -54,7 +54,7 @@ public class TortueJoueuseFactory implements TortueFactory {
             
             int nbRotation = rand.nextInt(8) + 1;
             for (int i = 0; i < nbRotation; i++) {
-                tortue.droite(45);
+                tortue.droite(ControllerJeu.angle);
             }
         }
 

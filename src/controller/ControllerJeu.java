@@ -1,6 +1,8 @@
 package controller;
 
 import factory.TortueFactory;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.Jeu;
@@ -15,8 +17,11 @@ import view.VueStrategie;
  * @author Ophélie EOUZAN 4APP
  */
 
-public abstract class ControllerJeu implements MouseListener {
+public abstract class ControllerJeu implements MouseListener, KeyListener {
 
+    public static int angle = 45;
+    public static int distance = 45;
+    
     // View
     protected static VueJeu vueFenetre = null;
     protected VueJeuBalle vueTerrain = null;
@@ -34,6 +39,7 @@ public abstract class ControllerJeu implements MouseListener {
         // Views
         vueTerrain = new VueJeuBalle();
         vueTerrain.addMouseListener(this);
+        vueTerrain.addKeyListener(this);
 
         // Add listeners
         jeu.addObserver(vueTerrain);
@@ -86,7 +92,7 @@ public abstract class ControllerJeu implements MouseListener {
     {
         jeu.setTortueCourante(tortue);
     }
-    
+
     public void reinitialiserTortueCourante()
     {
         getCourante().reinitialiser();
@@ -102,6 +108,36 @@ public abstract class ControllerJeu implements MouseListener {
     public void ajouterTortue(Tortue tortue) {
         jeu.ajouterTortue(tortue);
 //        setCourante(tortue);
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+    System.out.println("keyboard pressed");}
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+        System.out.println("keyboard types");
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("keyboard");
+        if (getCourante() == null) return;
+        
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_KP_RIGHT:
+                getCourante().droite(angle);
+                break;
+            case KeyEvent.VK_KP_LEFT:
+                getCourante().gauche(angle);
+                break;
+            case KeyEvent.VK_KP_UP:
+                getCourante().avancer(distance);
+                break;
+            default:
+                System.out.println("released key");
+                break;
+        }
     }
 
     @Override
