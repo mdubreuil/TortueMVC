@@ -92,4 +92,8 @@ public class TortueJoueuse extends Tortue {
             }
         }
     }
+    
+    public boolean estSuivie(){
+        return true;
+    }
 }
