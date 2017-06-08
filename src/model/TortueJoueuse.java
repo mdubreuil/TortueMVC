@@ -87,7 +87,7 @@ public class TortueJoueuse extends Tortue {
             }
         }
     }
-    
+
     private double getDistanceEuclidienne(Tortue tortue) {
         return Math.sqrt(Math.pow(this.getX() - tortue.getX(), 2) + Math.pow(this.getY() - tortue.getY(), 2));
     }

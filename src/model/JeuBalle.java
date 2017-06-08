@@ -1,6 +1,5 @@
 package model;
 
-import java.util.List;
 import java.util.TimerTask;
 
 /**
@@ -40,8 +39,6 @@ public class JeuBalle extends Jeu {
                         tortue.seDeplacer();
                     }
                 }
-                
-                // Passage de la balle entre tortues
             }
         }, 0, 1000); // Wait 1 second between each tick
     }
