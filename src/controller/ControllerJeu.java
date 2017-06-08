@@ -1,6 +1,8 @@
 package controller;
 
 import factory.TortueFactory;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.Jeu;
@@ -15,7 +17,7 @@ import view.VueStrategie;
  * @author Ophélie EOUZAN 4APP
  */
 
-public abstract class ControllerJeu implements MouseListener {
+public abstract class ControllerJeu implements MouseListener, KeyListener {
 
     public static int angle = 45;
     public static int distance = 45;
@@ -37,6 +39,7 @@ public abstract class ControllerJeu implements MouseListener {
         // Views
         vueTerrain = new VueJeuBalle();
         vueTerrain.addMouseListener(this);
+        vueTerrain.addKeyListener(this);
 
         // Add listeners
         jeu.addObserver(vueTerrain);
@@ -88,6 +91,8 @@ public abstract class ControllerJeu implements MouseListener {
     protected void setCourante(Tortue tortue)
     {
         jeu.setTortueCourante(tortue);
+        vueTerrain.setFocusable(true);
+        vueTerrain.requestFocus();
     }
 
     public void reinitialiserTortueCourante()
@@ -125,4 +130,30 @@ public abstract class ControllerJeu implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
+    
+    @Override
+    public void keyPressed(KeyEvent e) {}
+    
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        Tortue tortue = getCourante();
+        if (tortue == null) return;
+        // TODO : S'assurer que les codes clavier sont bons pour n'importe quel type d'ordinateur
+        switch (e.getKeyCode()) {            
+            case 39:
+                tortue.droite(ControllerJeu.angle);
+                break;
+            case 37:
+                tortue.gauche(ControllerJeu.angle);
+                break;
+            case 38:
+                tortue.avancer(ControllerJeu.distance);
+                break;
+            default:
+                break;
+        }
+    }
 }

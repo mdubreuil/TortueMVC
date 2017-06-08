@@ -30,7 +30,7 @@ public abstract class Jeu extends Observable {
                 return t;
             }
         }
-        return tortueCourante;
+        return null;
     }
 
     public void ajouterTortue(Tortue o) {
@@ -56,11 +56,16 @@ public abstract class Jeu extends Observable {
     }
 
     public void setTortueCourante(Tortue courante) {
+        // S'il y avait déjà une tortue courante, il faut lui dire qu'elle ne l'est plus
         if (tortueCourante != null) {
             tortueCourante.setCourante(false);
         }
-
-        courante.setCourante(true);
-        this.tortueCourante = courante;
+        // Si la tortue est une balle, elle ne peut pas être la tortue courante
+        if(courante instanceof TortueBalle) return;
+        // Si l'utilisateur a bien sélectionné une tortue, on la met en tant que tortue courante
+        if(courante != null){
+            courante.setCourante(true);  
+        }
+        this.tortueCourante = courante;        
     }
 }

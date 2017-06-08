@@ -38,7 +38,6 @@ public class TortueJoueuseFactory implements TortueFactory {
         // Vues & listeners de vue
         VueTortueJoueuse tView = new VueTortueJoueuse(tortue);
         vueTerrain.ajouterTortues(tView);
-        vueTerrain.addKeyListener(tView);
 
         for (Tortue t : terrain.getTortues()) {
             tortue.ajouterTortue(t);
@@ -60,7 +59,7 @@ public class TortueJoueuseFactory implements TortueFactory {
                 tortue.droite(ControllerJeu.angle);
             }
         }
-
+        
         return tortue;
     }
 }
