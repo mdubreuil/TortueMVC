@@ -30,25 +30,37 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     // Model    
     protected Jeu jeu = null;
     
-    abstract public void initialisation();
+    abstract public void initialisationJeu();
 
     public ControllerJeu() {
         vueStrategie = new VueStrategie();
-        jeu = new JeuBalle();
-        
+
         // Views
         vueTerrain = new VueJeuBalle();
         vueTerrain.addMouseListener(this);
         vueTerrain.addKeyListener(this);
 
-        // Add listeners
-        jeu.addObserver(vueTerrain);
-
         vueFenetre = new VueJeu(this, vueTerrain, vueStrategie);
     }
     
     public void start() {
-        jeu.start();
+        if (jeu == null) {
+            initialisationJeu();
+            jeu.run();
+        } else {
+            System.out.println("Resume");
+            jeu.resume();
+        }
+    }
+    
+    public void pause() {
+        System.out.println("Pause");
+        jeu.pause();
+    }
+
+    public void stop() {
+        System.out.println("Stop");
+        jeu.stop();
     }
 
     public VueJeu getVueFenetre() {

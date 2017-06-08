@@ -15,8 +15,15 @@ public abstract class Jeu extends Observable {
     protected List<Tortue> tortues; // la liste des tortues enregistrees
     protected Tortue tortueCourante = null;
     protected Timer timer = new Timer();
+    protected Etat etat = Etat.ARRETE;
 
-    public abstract void start();
+    public enum Etat {
+        EN_COURS,
+        EN_PAUSE,
+        ARRETE
+    }
+
+    public abstract void run();
 
     public Jeu() {
         tortues = new ArrayList();
@@ -26,6 +33,18 @@ public abstract class Jeu extends Observable {
         this();
         tortueCourante = courante;
         ajouterTortue(courante);
+    }
+    
+    public void pause() {
+        setEtat(Etat.EN_PAUSE);
+    }
+    
+    public void resume() {
+        setEtat(Etat.EN_COURS);
+    }
+
+    public void stop() {
+        setEtat(Etat.ARRETE);
     }
 
     public Tortue getTortue(int x, int y){
@@ -57,6 +76,14 @@ public abstract class Jeu extends Observable {
 
     public Tortue getTortueCourante() {
         return tortueCourante;
+    }
+
+    public Etat getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Etat etat) {
+        this.etat = etat;
     }
 
     public void setTortueCourante(Tortue courante) {

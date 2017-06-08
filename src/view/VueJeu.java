@@ -81,7 +81,7 @@ public class VueJeu extends JFrame implements ActionListener {
         getContentPane().add(buttonPanel,"North");
 
         toolBar.add(Box.createRigidArea(HGAP));
-        ajouterBouton(toolBar, "NouveauJeu", "Lance une nouvelle partie", null);
+        ajouterBouton(toolBar, "Start/Resume", "Lance une nouvelle partie", null);
         ajouterBouton(toolBar, "Stop", "Arrête la partie", null);
         ajouterBouton(toolBar, "Pause", "Suspend la partie", null);
         
@@ -121,20 +121,16 @@ public class VueJeu extends JFrame implements ActionListener {
         String c = e.getActionCommand();
 
         // actions des boutons du haut
-        if (c.equals("NouveauJeu")) {
-            // TODO
-            System.out.println("Une nouvelle partie sera lançée très prochainement");
+        if (c.equals("Start/Resume")) {
             controller.start();
         } else if (c.equals("Stop")) {
-            // TODO
-            System.out.println("Une partie déjà en cours sera arrêtée très prochainement");
+            controller.stop();
         } else if (c.equals("Pause")) {
-            // TODO
-            System.out.println("Une partie déjà en cours sera suspendue très prochainement");
+            controller.pause();
         } else if (c.equals("Quitter")) {
             controller.quitter();
         }
-        vueTerrain.repaint();
+        //vueTerrain.repaint();
     }
 
     // efface tout et reinitialise la feuille

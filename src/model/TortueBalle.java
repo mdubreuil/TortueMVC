@@ -27,11 +27,16 @@ public class TortueBalle extends Tortue implements Observer {
     }
 
     public void setTortueSuivie(Tortue suivie) {
+        if (suivie == tortueSuivie) {
+            return;
+        }
+
         if (tortueSuivie != null) {
             tortueSuivie.deleteObserver(this);
         }
 
         if (suivie != null) {
+            System.out.println(suivie + " a la balle!");
             suivie.addObserver(this);
             x = suivie.getX();
             y = suivie.getY();
@@ -49,5 +54,10 @@ public class TortueBalle extends Tortue implements Observer {
             Tortue tortue = (Tortue) o;
             setPosition(tortue.getX(), tortue.getY());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "TortueBalle";
     }
 }

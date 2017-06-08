@@ -114,4 +114,7 @@ public abstract class Tortue extends Observable implements Cloneable {
     public Tortue clone() throws CloneNotSupportedException {
         return (Tortue) super.clone();
     }
+
+    @Override
+    public abstract String toString();
 }
