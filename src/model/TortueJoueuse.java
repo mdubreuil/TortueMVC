@@ -82,7 +82,6 @@ public class TortueJoueuse extends Tortue {
         for (Tortue tortue : tortuesConnues) {
             if (tortue instanceof TortueBalle && getDistanceEuclidienne(tortue) < distanceBalle) {
                 TortueBalle balle = (TortueBalle) tortue;
-                System.out.println(this.nom + " a la balle!");
                 balle.setTortueSuivie(this);
             }
         }
@@ -101,5 +100,10 @@ public class TortueJoueuse extends Tortue {
     
     private double getDistanceEuclidienne(Tortue tortue) {
         return Math.sqrt(Math.pow(this.getX() - tortue.getX(), 2) + Math.pow(this.getY() - tortue.getY(), 2));
+    }
+
+    @Override
+    public String toString() {
+        return nom;
     }
 }

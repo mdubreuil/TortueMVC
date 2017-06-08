@@ -29,15 +29,21 @@ public class JeuBalle extends Jeu {
     }
 
     @Override
-    public void start() {
+    public void run() {
+        setEtat(Etat.EN_COURS);
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                for (Tortue t : tortues) {
-                    if (t != tortueCourante && t instanceof TortueJoueuse) {
-                        TortueJoueuse tortue = (TortueJoueuse) t;
-                        tortue.seDeplacer();
+                if (etat == Etat.EN_COURS) {
+                    for (Tortue t : tortues) {
+                        if (t != tortueCourante && t instanceof TortueJoueuse) {
+                            TortueJoueuse tortue = (TortueJoueuse) t;
+                            tortue.seDeplacer();
+                        }
                     }
+                } else if (etat == Etat.ARRETE) {
+                    timer.cancel();
+                    timer.purge();
                 }
             }
         }, 0, 1000); // Wait 1 second between each tick

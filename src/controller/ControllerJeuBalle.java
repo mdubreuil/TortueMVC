@@ -22,13 +22,15 @@ public class ControllerJeuBalle extends ControllerJeu {
             @Override
             public void run(){
                 ControllerJeuBalle controller = new ControllerJeuBalle(/*new TortueJoueuseFactory()*/);
-                controller.initialisation();
             }
         });
     }
 
     @Override
-    public void initialisation() {
+    public void initialisationJeu() {
+        jeu = new JeuBalle();
+        jeu.addObserver(vueTerrain);
+        
         // Ajout de la balle en premier pour que toutes les tortues connaissent la balle
         this.ajouterTortue(new TortueBalleFactory());
         
