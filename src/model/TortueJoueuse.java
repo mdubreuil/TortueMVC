@@ -18,7 +18,7 @@ public class TortueJoueuse extends Tortue {
     protected String nom;
     protected List<Tortue> tortuesConnues;
     protected Strategie etat;
-    
+
     public TortueJoueuse(String name) {
         this.nom = name;
         this.tortuesConnues = new ArrayList();
@@ -35,6 +35,8 @@ public class TortueJoueuse extends Tortue {
 
     public void setNom(String nom) {
         this.nom = nom;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void setTortuesConnues(List<Tortue> tortuesConnues) {
@@ -43,6 +45,8 @@ public class TortueJoueuse extends Tortue {
 
     public void setEtat(Strategie etat) {
         this.etat = etat;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public Strategie getEtat() {

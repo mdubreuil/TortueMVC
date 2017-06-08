@@ -56,6 +56,11 @@ public abstract class Jeu extends Observable {
     }
 
     public void setTortueCourante(Tortue courante) {
+        if (tortueCourante != null) {
+            tortueCourante.setCourante(false);
+        }
+
+        courante.setCourante(true);
         this.tortueCourante = courante;
     }
 }

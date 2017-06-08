@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JComponent;
 import model.Tortue;
 
@@ -13,14 +15,14 @@ import model.Tortue;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class VueTortue extends JComponent
+public abstract class VueTortue extends JComponent implements Observer
 {    
     protected static final int rp = 10, rb = 5; // Taille de la pointe et de la base de la fleche
 
     protected Tortue tortue;
 
     public VueTortue(Tortue tortue) {
-        this.tortue = tortue;   
+        this.tortue = tortue;
     }
     
     public Tortue getTortue() {
@@ -76,5 +78,10 @@ public class VueTortue extends JComponent
             case 11: return(Color.yellow);
             default : return(Color.black);
         }
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        // Do nothing by default
     }
 }

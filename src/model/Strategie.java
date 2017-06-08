@@ -5,6 +5,6 @@ package model;
  * @author Ophélie EOUZAN 4APP
  */
 
-interface Strategie {
+public interface Strategie {
     public void avancer();
 }

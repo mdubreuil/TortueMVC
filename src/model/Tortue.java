@@ -15,6 +15,7 @@ public abstract class Tortue extends Observable {
     protected int x = 0, y = 0;
     protected int direction = -90;
     protected int couleur = 0;
+    protected boolean courante = false;
 
     public Tortue() {
         reinitialiser();
@@ -90,7 +91,17 @@ public abstract class Tortue extends Observable {
     public int getCouleur() {
         return couleur;
     }
-    
+
+    public boolean isCourante() {
+        return courante;
+    }
+
+    public void setCourante(boolean courante) {
+        this.courante = courante;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
     public void setCouleur(int n) {
         this.couleur = n;
         this.setChanged();

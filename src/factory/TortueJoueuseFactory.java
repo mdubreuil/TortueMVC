@@ -8,7 +8,6 @@ import model.Tortue;
 import model.TortueJoueuse;
 import view.VueJeu;
 import view.VueJeuBalle;
-import view.VueTortue;
 import view.VueTortueJoueuse;
 
 /**
@@ -29,17 +28,20 @@ public class TortueJoueuseFactory implements TortueFactory {
     @Override
     public Tortue ajouterNouvelleTortue(ControllerJeu controller) {
         VueJeu fenetre = controller.getVueFenetre();
-        VueJeuBalle vueFeuille = fenetre.getVueTerrain();
+        VueJeuBalle vueTerrain = fenetre.getVueTerrain();
         Jeu terrain = controller.getJeu();
 
+        // Modèle
         TortueJoueuse tortue = new TortueJoueuse(/*fenetre.getTortueName()*/); // TODO change
-        tortue.addObserver(vueFeuille);
-        VueTortue tView = new VueTortueJoueuse(tortue);
-        vueFeuille.ajouterTortues(tView);
+        tortue.addObserver(vueTerrain);
+        
+        // Vues & listeners de vue
+        VueTortueJoueuse tView = new VueTortueJoueuse(tortue);
+        vueTerrain.ajouterTortues(tView);
+        vueTerrain.addKeyListener(tView);
 
         for (Tortue t : terrain.getTortues()) {
             tortue.ajouterTortue(t);
-            
             if (t instanceof TortueJoueuse) {
                 ((TortueJoueuse)t).ajouterTortue(tortue);
             }
@@ -52,6 +54,7 @@ public class TortueJoueuseFactory implements TortueFactory {
             int y = rand.nextInt(VueJeuBalle.height);
             tortue.setPosition(x, y);
             
+            // Random angle
             int nbRotation = rand.nextInt(8) + 1;
             for (int i = 0; i < nbRotation; i++) {
                 tortue.droite(ControllerJeu.angle);

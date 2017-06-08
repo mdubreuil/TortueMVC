@@ -13,6 +13,7 @@ public class VueTortueBalle extends VueTortue {
     
     public VueTortueBalle(TortueBalle tortue) {
         super(tortue);
+        setFocusable(false);
     }
 
     @Override
