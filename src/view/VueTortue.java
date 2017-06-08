@@ -39,7 +39,7 @@ public abstract class VueTortue extends JComponent implements Observer
 
         //Calcule des deux bases
         //Angle de la droite
-        double theta = Tortue.getRatioDegRad() * (-tortue.getDirection());
+        double theta = Tortue.ratioDegRad * (-tortue.getDirection());
         //Demi angle au sommet du triangle
         double alpha = Math.atan((float) rb / (float) rp);
         //Rayon de la fleche

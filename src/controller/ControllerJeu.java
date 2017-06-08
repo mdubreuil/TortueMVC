@@ -31,7 +31,7 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     protected Jeu jeu = null;
     
     abstract public void initialisation();
-    
+
     public ControllerJeu() {
         vueStrategie = new VueStrategie();
         jeu = new JeuBalle();
@@ -45,6 +45,10 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
         jeu.addObserver(vueTerrain);
 
         vueFenetre = new VueJeu(this, vueTerrain, vueStrategie);
+    }
+    
+    public void start() {
+        jeu.start();
     }
 
     public VueJeu getVueFenetre() {

@@ -1,12 +1,15 @@
 package model;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author Mélanie DUBREUIL 4APP
  * @author Ophélie EOUZAN 4APP
  */
 
-public class TortueBalle extends Tortue {
+public class TortueBalle extends Tortue implements Observer {
 
     protected Tortue tortueSuivie = null;
 
@@ -24,10 +27,27 @@ public class TortueBalle extends Tortue {
     }
 
     public void setTortueSuivie(Tortue suivie) {
-        this.tortueSuivie = suivie;
-        this.x = suivie.getX();
-        this.y = suivie.getY();
+        if (tortueSuivie != null) {
+            tortueSuivie.deleteObserver(this);
+        }
+
+        if (suivie != null) {
+            suivie.addObserver(this);
+            x = suivie.getX();
+            y = suivie.getY();
+        }
+
+        tortueSuivie = suivie;
+
         this.setChanged();
         this.notifyObservers();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof Tortue) {
+            Tortue tortue = (Tortue) o;
+            setPosition(tortue.getX(), tortue.getY());
+        }
     }
 }

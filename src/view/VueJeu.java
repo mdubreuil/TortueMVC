@@ -124,6 +124,7 @@ public class VueJeu extends JFrame implements ActionListener {
         if (c.equals("NouveauJeu")) {
             // TODO
             System.out.println("Une nouvelle partie sera lançée très prochainement");
+            controller.start();
         } else if (c.equals("Stop")) {
             // TODO
             System.out.println("Une partie déjà en cours sera arrêtée très prochainement");

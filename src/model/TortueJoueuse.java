@@ -20,13 +20,18 @@ public class TortueJoueuse extends Tortue {
     protected Strategie etat;
 
     public TortueJoueuse(String name) {
-        this.nom = name;
-        this.tortuesConnues = new ArrayList();
+        nom = name;
+        tortuesConnues = new ArrayList();
+        etat = new StrategieAleatoire();
         ++cpt;
     }
 
     public TortueJoueuse() {
         this(DEFAULT_NAME + cpt);
+    }
+    
+    public void seDeplacer() {
+        etat.deplacer(this);
     }
 
     public String getNom() {
