@@ -15,6 +15,7 @@ Simple :
 - Expliquer les choix de conception (design patterns, MVC) (rapport)
 - Détailler les tests (rapport)
 - Génrer le .jar
+- Fix le déplacement aléatoire
 ---
 Moyen :
 - Permettre le changement de stratégie sur l'interface graphique
@@ -22,7 +23,6 @@ Moyen :
 - Gérer les états du Jeu avec un enum (EN_COURS, EN_PAUSE, ...) et bloquer les actions utilisateurs en fonction de cet état
 ---
 Complexe :
-- Déplacer les tortues via le clavier
 - Passage de la balle entre les tortues
 - Implémenter la stratégie "Intelligente" : se rapprocher de la balle
 - Une tortue joueuse doit attraper la balle quand elle est près d'elle
