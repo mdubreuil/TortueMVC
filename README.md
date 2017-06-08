@@ -20,6 +20,7 @@ Moyen :
 - Implémenter la stratégie aléatoire
 - Permettre le changement de stratégie sur l'interface graphique
 - Implémenter les tests unitaires
+- Gérer les états du Jeu avec un enum (EN_COURS, EN_PAUSE, ...) et bloquer les actions utilisateurs en fonction de cet état
 ---
 Complexe :
 - Déplacer les tortues via le clavier
