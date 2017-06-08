@@ -18,6 +18,7 @@ public class TortueJoueuse extends Tortue {
     protected String nom;
     protected List<Tortue> tortuesConnues;
     protected Strategie etat;
+    protected int distanceBalle = 30;
 
     public TortueJoueuse(String name) {
         nom = name;
@@ -74,22 +75,20 @@ public class TortueJoueuse extends Tortue {
         return tortuesConnues;
     }
 
-    public double getDistanceEuclidienne(Tortue tortue) {
-        return Math.sqrt(Math.pow(this.getX() - tortue.getX(), 2) + Math.pow(this.getY() - tortue.getY(), 2));
-    }
-
     @Override
     public void avancer(int dist) {
         super.avancer(dist);
+
         for (Tortue tortue : tortuesConnues) {
-            if (getDistanceEuclidienne(tortue) < 15) {
-                if (tortue instanceof TortueJoueuse) {
-                    System.out.println(">> " + nom + ": Salut " + ((TortueJoueuse)tortue).getNom());
-                } else {
-                    System.out.println(">> " + nom + ": Bonjour Tortue!");
-                }
-                tortue.avancer(dist);
+            if (tortue instanceof TortueBalle && getDistanceEuclidienne(tortue) < distanceBalle) {
+                TortueBalle balle = (TortueBalle) tortue;
+                System.out.println(this.nom + " a la balle!");
+                balle.setTortueSuivie(this);
             }
         }
+    }
+    
+    private double getDistanceEuclidienne(Tortue tortue) {
+        return Math.sqrt(Math.pow(this.getX() - tortue.getX(), 2) + Math.pow(this.getY() - tortue.getY(), 2));
     }
 }

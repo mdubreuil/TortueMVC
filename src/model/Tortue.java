@@ -1,8 +1,6 @@
 package model;
 
 import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import view.VueJeuBalle;
 
 /**
@@ -88,6 +86,8 @@ public abstract class Tortue extends Observable implements Cloneable {
 
     public void setDirection(int direction) {
         this.direction = direction;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public int getCouleur() {

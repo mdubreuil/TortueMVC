@@ -1,9 +1,7 @@
 package model;
 
 import controller.ControllerJeu;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Random;
 import view.VueJeuBalle;
 
 /**
@@ -18,6 +16,7 @@ public abstract class Strategie {
     public int xMin = 0, yMin = 0;
     public int distance = ControllerJeu.distance;
     public int angle = ControllerJeu.angle;
+    protected Random rand = new Random();
     
     public abstract void deplacer(TortueJoueuse tortue);
     
@@ -32,13 +31,12 @@ public abstract class Strategie {
 //        } catch (CloneNotSupportedException ex) {
 //            Logger.getLogger(Strategie.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        
+        int x = tortue.getX(), y = tortue.getY();
         tortue.avancer(distance);
-        if (isPositionCorrecte(tortue)) {
-            return;
+        while (!isPositionCorrecte(tortue)) {
+            tortue.setPosition(x, y);
+            tortue.setDirection(-tortue.getDirection());
         }
-        
-        ajusterPosition(tortue);
     }
 
     private boolean isPositionCorrecte(Tortue tortue) {
@@ -52,20 +50,9 @@ public abstract class Strategie {
         int x = tortue.getX();
         int y = tortue.getY();
 
-        if (x > xMax) {
-            x = xMax;
-        } else if (x < xMin) {
-            x = xMin;
-        }
+        int inverseX = rand.nextInt() > 0 ? x : -x;
+        int inverseY = rand.nextInt() > 0 ? y : -y;
 
-        if (y > yMax) {
-            y = yMax;
-        } else if (y < yMin) {
-            y = yMin;
-        }
-
-        tortue.setPosition(x, y);
+        tortue.setPosition(inverseX, inverseY);
     }
-
-    
 }
