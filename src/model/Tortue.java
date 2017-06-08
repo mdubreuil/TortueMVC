@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import view.VueJeuBalle;
 
 /**
@@ -9,9 +11,9 @@ import view.VueJeuBalle;
  * @author Ophélie EOUZAN 4APP
  */
 
-public abstract class Tortue extends Observable {
+public abstract class Tortue extends Observable implements Cloneable {
 
-    protected static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
+    public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
     protected int x = 0, y = 0;
     protected int direction = -90;
     protected int couleur = 0;
@@ -31,14 +33,7 @@ public abstract class Tortue extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
-
-    public void setPosition(int newX, int newY) {
-        x = newX;
-        y = newY;
-        this.setChanged();
-        this.notifyObservers();
-    }
-
+    
     public void avancer(int dist) {
         int newX = (int) Math.round(x+dist*Math.cos(ratioDegRad * direction));
         int newY = (int) Math.round(y+dist*Math.sin(ratioDegRad * direction));
@@ -60,6 +55,13 @@ public abstract class Tortue extends Observable {
         this.notifyObservers();
     }
 
+    public void setPosition(int newX, int newY) {
+        x = newX;
+        y = newY;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
     public void couleur(int n) {
         couleur = n % 12;
         this.setChanged();
@@ -70,10 +72,6 @@ public abstract class Tortue extends Observable {
         couleur(couleur + 1);
         this.setChanged();
         this.notifyObservers();
-    }
-    
-    public static double getRatioDegRad() {
-        return ratioDegRad;
     }
 
     public int getX() {
@@ -86,6 +84,10 @@ public abstract class Tortue extends Observable {
 
     public int getDirection() {
         return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
     }
 
     public int getCouleur() {
@@ -106,5 +108,10 @@ public abstract class Tortue extends Observable {
         this.couleur = n;
         this.setChanged();
         this.notifyObservers();
+    }
+    
+    @Override
+    public Tortue clone() throws CloneNotSupportedException {
+        return (Tortue) super.clone();
     }
 }

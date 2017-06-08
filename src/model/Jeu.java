@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Timer;
 
 /**
  * @author Mélanie DUBREUIL 4APP
@@ -11,8 +12,11 @@ import java.util.Observable;
 
 public abstract class Jeu extends Observable {
 
-    private List<Tortue> tortues; // la liste des tortues enregistrees
-    private Tortue tortueCourante = null;
+    protected List<Tortue> tortues; // la liste des tortues enregistrees
+    protected Tortue tortueCourante = null;
+    protected Timer timer = new Timer();
+
+    public abstract void start();
 
     public Jeu() {
         tortues = new ArrayList();
