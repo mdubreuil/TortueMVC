@@ -3,7 +3,6 @@ package controller;
 import factory.TortueBalleFactory;
 import factory.TortueFactory;
 import factory.TortueJoueuseFactory;
-import java.util.List;
 import javax.swing.SwingUtilities;
 import model.*;
 
@@ -30,13 +29,15 @@ public class ControllerJeuBalle extends ControllerJeu {
 
     @Override
     public void initialisation() {
+        // Ajout de la balle en premier pour que toutes les tortues connaissent la balle
+        this.ajouterTortue(new TortueBalleFactory());
+        
+        // Creation des autres tortues
         TortueFactory factoryJoueuse = new TortueJoueuseFactory(true);
         int nbJoueurs = ((JeuBalle) jeu).getNbJoueurs();
         for (int i = 0; i < nbJoueurs; i++) {
             Tortue tortue = factoryJoueuse.ajouterNouvelleTortue(this);
             this.ajouterTortue(tortue);
         }
-
-        this.ajouterTortue(new TortueBalleFactory());
     }
 }

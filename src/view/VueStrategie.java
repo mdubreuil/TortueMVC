@@ -47,6 +47,7 @@ public class VueStrategie extends JPanel implements Observer
                 java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
 
+            @Override
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }

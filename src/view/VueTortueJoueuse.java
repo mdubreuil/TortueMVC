@@ -26,6 +26,5 @@ public class VueTortueJoueuse extends VueTortue {
     }
     
     @Override
-    public void update(Observable o, Object arg) {
-    }
+    public void update(Observable o, Object arg) {}
 }

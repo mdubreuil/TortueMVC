@@ -2,11 +2,11 @@
 Projet du module d'ISI3 consacré aux Design Patterns
 
 * Proposer un jeu de balles
+* ~~Proposer un jeu de foot~~
 
 ## TODO (par niveau de complexité)
 
 Simple :
-- Implémenter les boutons "START", "STOP", "PAUSE"
 - Déclencher un timer lorsqu'une tortue a la balle
 - Conception des tests unitaires
 - Commenter le code : en-tête de chaque méthode
@@ -14,7 +14,7 @@ Simple :
 - Modifier le diagramme UML (rapport)
 - Expliquer les choix de conception (design patterns, MVC) (rapport)
 - Détailler les tests (rapport)
-- Génrer le .jar
+- Générer le .jar
 ---
 Moyen :
 - Permettre le changement de stratégie sur l'interface graphique
@@ -22,10 +22,8 @@ Moyen :
 - Gérer les états du Jeu avec un enum (EN_COURS, EN_PAUSE, ...) et bloquer les actions utilisateurs en fonction de cet état
 ---
 Complexe :
-- Déplacer les tortues via le clavier
-- Passage de la balle entre les tortues
+- Implémenter un temps minimum de possession de la balle par la tortue
 - Implémenter la stratégie "Intelligente" : se rapprocher de la balle
-- Une tortue joueuse doit attraper la balle quand elle est près d'elle
 ---
 Optionnel :
 - Couleur des tortues selon leur stratégie
