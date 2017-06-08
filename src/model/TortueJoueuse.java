@@ -88,7 +88,15 @@ public class TortueJoueuse extends Tortue {
         }
     }
     public boolean estSuivie(){
-        return true;
+        for (Tortue tortue : tortuesConnues) {
+            if (tortue instanceof TortueBalle) {
+                TortueBalle balle = (TortueBalle) tortue;
+                if(balle.getX() == this.getX() && balle.getY() == this.getY()){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     private double getDistanceEuclidienne(Tortue tortue) {

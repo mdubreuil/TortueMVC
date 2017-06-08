@@ -9,8 +9,8 @@ import java.util.List;
  */
 
 public class StrategieIntelligente extends StrategieAleatoire {
-    private final static int RAYON_X = 75;
-    private final static int RAYON_Y = 75;
+    private final static int RAYON_X = 300;
+    private final static int RAYON_Y = 300;
     private int[] coordonneesBalle;
 
     public int[] getCoordonneesBalle() {
@@ -26,23 +26,17 @@ public class StrategieIntelligente extends StrategieAleatoire {
         calculerCoordonneesBalle(tortue);
         if(estPresDeLaBalle(tortue)){
             if(!tortue.estSuivie()){
-                
+                seRapprocherBalle(tortue);
             }
-//            double d = rand.nextDouble();
-//        if (d < seuilGauche) {
-//            tortue.gauche(angle);
-//        } else if (d < seuilDroite) {
-//            tortue.droite(angle);
-//        }
-//        avancer(tortue);
         } else {
            super.deplacer(tortue); 
         }
     }
     
-    public void calculerCoordonneesBalle(Tortue t){
+    public void calculerCoordonneesBalle(TortueJoueuse t){
         int[] coordonneesBalle = new int[2];
         List<Tortue> lTortues = new ArrayList<>();
+        lTortues = t.getTortuesConnues();
         for (Tortue tortue : lTortues){
             if(tortue instanceof TortueBalle){
                 coordonneesBalle[0] = tortue.getX();
@@ -52,7 +46,8 @@ public class StrategieIntelligente extends StrategieAleatoire {
         this.setCoordonneesBalle(coordonneesBalle);
     }
     
-    public boolean estPresDeLaBalle(Tortue t){
+    public boolean estPresDeLaBalle(TortueJoueuse t){
+        System.out.println(t.getX());
         if((coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] <= t.getY() && coordonneesBalle[1] >= t.getY() - RAYON_Y) ||
             (coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y) ||
             (coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] <= t.getY() && coordonneesBalle[1] >= t.getY() - RAYON_Y) ||
@@ -62,7 +57,7 @@ public class StrategieIntelligente extends StrategieAleatoire {
         return false;
     }
     
-    public void seRapprocherBalle(Tortue t){
+    public void seRapprocherBalle(TortueJoueuse t){
         // La balle est en bas à gauche par rapport à la tortue
         if(coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] <= t.getY() && coordonneesBalle[1] >= t.getY() - RAYON_Y){
             t.gauche(3*angle);
@@ -77,7 +72,7 @@ public class StrategieIntelligente extends StrategieAleatoire {
         }
         // La balle est en haut à droite par rapport à la tortue
         if(coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y){
-            t.gauche(angle);
+            t.droite(angle);
         }
         avancer(t);
     }

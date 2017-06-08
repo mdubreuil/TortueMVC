@@ -39,5 +39,9 @@ public class ControllerJeuBalle extends ControllerJeu {
             Tortue tortue = factoryJoueuse.ajouterNouvelleTortue(this);
             this.ajouterTortue(tortue);
         }
+        TortueJoueuse tortue = (TortueJoueuse) factoryJoueuse.ajouterNouvelleTortue(this);
+        tortue.setEtat(new StrategieIntelligente());
+        tortue.setCouleur(5);
+        this.ajouterTortue(tortue);
     }
 }
