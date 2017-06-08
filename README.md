@@ -6,7 +6,6 @@ Projet du module d'ISI3 consacré aux Design Patterns
 ## TODO (par niveau de complexité)
 
 Simple :
-- Implémenter les boutons "START", "STOP", "PAUSE"
 - Déclencher un timer lorsqu'une tortue a la balle
 - Conception des tests unitaires
 - Commenter le code : en-tête de chaque méthode
