@@ -25,6 +25,7 @@ Complexe :
 - Déplacer les tortues via le clavier
 - Passage de la balle entre les tortues
 - Implémenter la stratégie "Intelligente" : se rapprocher de la balle
+- Une tortue joueuse doit attraper la balle quand elle est près d'elle
 ---
 Optionnel :
 - Couleur des tortues selon leur stratégie
