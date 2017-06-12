@@ -157,15 +157,14 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     public void keyReleased(KeyEvent e) {
         Tortue tortue = getCourante();
         if (tortue == null) return;
-        // TODO : S'assurer que les codes clavier sont bons pour n'importe quel type d'ordinateur
         switch (e.getKeyCode()) {            
-            case 39:
+            case KeyEvent.VK_RIGHT:
                 tortue.droite(ControllerJeu.angle);
                 break;
-            case 37:
+            case KeyEvent.VK_LEFT:
                 tortue.gauche(ControllerJeu.angle);
                 break;
-            case 38:
+            case KeyEvent.VK_UP:
                 tortue.avancer(ControllerJeu.distance);
                 break;
             default:
