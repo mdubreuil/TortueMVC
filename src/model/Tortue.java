@@ -13,7 +13,7 @@ public abstract class Tortue extends Observable implements Cloneable {
 
     public static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
     protected int x = 0, y = 0;
-    protected int direction = -90;
+    protected int direction = 90;
     protected int couleur = 0;
     protected boolean courante = false;
 
@@ -26,7 +26,7 @@ public abstract class Tortue extends Observable implements Cloneable {
     public void reinitialiser() {
         x = 0;
         y = 0;
-        direction = -90;
+        direction = 90;
         couleur = 0;
         this.setChanged();
         this.notifyObservers();
@@ -40,7 +40,7 @@ public abstract class Tortue extends Observable implements Cloneable {
         this.setChanged();
         this.notifyObservers();
     }
-
+    
     public void droite(int ang) {
         direction = (direction + ang) % 360;
         this.setChanged();

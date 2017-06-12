@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import static java.lang.Math.abs;
 import java.util.List;
 
 /**
@@ -9,9 +9,10 @@ import java.util.List;
  */
 
 public class StrategieIntelligente extends StrategieAleatoire {
-    private final static int RAYON_X = 300;
-    private final static int RAYON_Y = 300;
+    private final static int RAYON_X = 250;
+    private final static int RAYON_Y = 250;
     private int[] coordonneesBalle;
+    private int[] positionBalle;
 
     public int[] getCoordonneesBalle() {
         return coordonneesBalle;
@@ -24,57 +25,71 @@ public class StrategieIntelligente extends StrategieAleatoire {
     @Override
     public void deplacer(TortueJoueuse tortue) {
         calculerCoordonneesBalle(tortue);
-        if(estPresDeLaBalle(tortue)){
-            if(!tortue.estSuivie()){
-                seRapprocherBalle(tortue);
-            }
+        if(estPresDeLaBalle(tortue) && !tortue.estSuivie()){
+            seRapprocherBalle(tortue);
         } else {
            super.deplacer(tortue); 
         }
     }
     
     public void calculerCoordonneesBalle(TortueJoueuse t){
-        int[] coordonneesBalle = new int[2];
-        List<Tortue> lTortues = new ArrayList<>();
-        lTortues = t.getTortuesConnues();
+        int[] balle = new int[2];
+        List<Tortue> lTortues = t.getTortuesConnues();
         for (Tortue tortue : lTortues){
             if(tortue instanceof TortueBalle){
-                coordonneesBalle[0] = tortue.getX();
-                coordonneesBalle[1] = tortue.getY();
+                balle[0] = tortue.getX();
+                balle[1] = tortue.getY();
             }            
         }
-        this.setCoordonneesBalle(coordonneesBalle);
+        this.setCoordonneesBalle(balle);
     }
     
     public boolean estPresDeLaBalle(TortueJoueuse t){
-        System.out.println(t.getX());
-        if((coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] <= t.getY() && coordonneesBalle[1] >= t.getY() - RAYON_Y) ||
-            (coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y) ||
-            (coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] <= t.getY() && coordonneesBalle[1] >= t.getY() - RAYON_Y) ||
-            (coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y)){
+        positionBalle = new int[1];        
+        if(coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y) {
+            // La balle est en bas à gauche par rapport à la tortue
+            positionBalle[0] = 1;
+            return true;
+        } else if(coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() + RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y){
+            // La balle est en haut à gauche par rapport à la tortue
+            positionBalle[0] = 2;
+            return true;
+        } else if(coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y) {
+            // La balle est en bas à droite par rapport à la tortue
+            positionBalle[0] = 3;
+            return true;
+        } else if (coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] >= t.getY() - RAYON_Y && coordonneesBalle[1] <= t.getY()){
+            // La balle est en haut à droite par rapport à la tortue
+            positionBalle[0] = 4;
             return true;
         }
         return false;
     }
     
     public void seRapprocherBalle(TortueJoueuse t){
-        // La balle est en bas à gauche par rapport à la tortue
-        if(coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] <= t.getY() && coordonneesBalle[1] >= t.getY() - RAYON_Y){
-            t.gauche(3*angle);
-        }
-        // La balle est en haut à gauche par rapport à la tortue
-        if(coordonneesBalle[0] <= t.getX() && coordonneesBalle[0] >= t.getX() - RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y){
-            t.gauche(angle);
-        }
-        // La balle est en bas à droite par rapport à la tortue
-        if(coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] <= t.getY() && coordonneesBalle[1] >= t.getY() - RAYON_Y){
-            t.droite(3*angle);
-        }
-        // La balle est en haut à droite par rapport à la tortue
-        if(coordonneesBalle[0] >= t.getX() && coordonneesBalle[0] <= t.getX() + RAYON_X && coordonneesBalle[1] >= t.getY() && coordonneesBalle[1] <= t.getY() + RAYON_Y){
-            t.droite(angle);
+        t.setDirection(-90);
+        double coordonneeX = coordonneesBalle[0]-t.getX();
+        double coordonneeY = coordonneesBalle[1]-t.getY();
+        int degree = (int) Math.toDegrees(Math.atan(coordonneeX/coordonneeY));
+        
+        switch(positionBalle[0]){
+            case 1:
+                t.droite(abs(degree) + 180);
+                break;
+            case 3 :
+                t.droite(abs(degree)+90);
+                break;
+            case 2 :
+                t.gauche(abs(degree));
+                break;
+            case 4 :
+                t.droite(abs(degree));
+                break;
+            default :
+                break;
         }
         avancer(t);
+        
     }
     
 }

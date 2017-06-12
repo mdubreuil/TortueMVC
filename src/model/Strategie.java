@@ -35,7 +35,7 @@ public abstract class Strategie {
         tortue.avancer(distance);
         while (!isPositionCorrecte(tortue)) {
             tortue.setPosition(x, y);
-            tortue.setDirection(-tortue.getDirection());
+            tortue.setDirection(tortue.getDirection());
         }
     }
 

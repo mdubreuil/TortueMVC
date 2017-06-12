@@ -40,6 +40,7 @@ public class TortueBalle extends Tortue implements Observer {
             suivie.addObserver(this);
             x = suivie.getX();
             y = suivie.getY();
+            direction = suivie.getDirection();
         }
 
         tortueSuivie = suivie;
@@ -53,6 +54,7 @@ public class TortueBalle extends Tortue implements Observer {
         if (o instanceof Tortue) {
             Tortue tortue = (Tortue) o;
             setPosition(tortue.getX(), tortue.getY());
+            setDirection(tortue.getDirection());
         }
     }
 
