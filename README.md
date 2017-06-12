@@ -20,7 +20,6 @@ Simple :
 Moyen :
 - Permettre le changement de stratégie sur l'interface graphique
 - Implémenter les tests unitaires
-- Gérer les états du Jeu avec un enum (EN_COURS, EN_PAUSE, ...) et bloquer les actions utilisateurs en fonction de cet état (Reset du controller, jeu, etc.)
 ---
 Complexe :
 - Implémenter un temps minimum de possession de la balle par la tortue
