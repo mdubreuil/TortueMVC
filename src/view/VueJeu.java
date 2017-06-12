@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -26,13 +28,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import model.Jeu;
+import util.TimeFormatter;
 
 /**
  *
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class VueJeu extends JFrame implements ActionListener {
+public class VueJeu extends JFrame implements ActionListener, Observer {
     /**
      * - La vue peut faire des requêtes d'état sur le modèle, signifie qu'elle peut avoir une dépendance vers le modèle. Slide 4/10 rappel MVC
      * - Chaque vue est associée à un controlleur, et chaque controleur est associé à une vue (écouteur d'évènements)
@@ -45,7 +49,7 @@ public class VueJeu extends JFrame implements ActionListener {
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
     private JComboBox listeTortues;
-    
+    private JLabel labelTemps;
     private VueJeuBalle vueTerrain;
     private VueStrategie vueStrategie;
     
@@ -86,7 +90,7 @@ public class VueJeu extends JFrame implements ActionListener {
         ajouterBouton(toolBar, "Pause", "Suspend la partie", null);
         
         toolBar.add(Box.createRigidArea(HGAP));
-        JLabel labelTemps = new JLabel("   00:00");
+        labelTemps = new JLabel("   00:00");
         toolBar.add(labelTemps);
 
         // Menus
@@ -186,5 +190,18 @@ public class VueJeu extends JFrame implements ActionListener {
     public void ajouterFeuilleDessin(VueJeuBalle vueTerrain) {
         this.vueTerrain = vueTerrain;
         getContentPane().add(this.vueTerrain, "Center");
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof Jeu) {
+            int duree = 0;
+            if (o != null) {
+                Jeu jeu = (Jeu) o;
+                duree = jeu.getDuree();
+            }
+
+            labelTemps.setText(TimeFormatter.getMinuteSecondeFormat(TimeFormatter.TimeChoice.SECONDE, duree));
+        }
     }
 }

@@ -12,9 +12,8 @@ import java.util.List;
 
 public class TortueJoueuse extends Tortue {
 
-    public static String DEFAULT_NAME = "Toto";
-    public static int cpt = 0;
-
+    protected static String DEFAULT_NAME = "Toto";
+    protected static int cpt = 0;
     protected String nom;
     protected List<Tortue> tortuesConnues;
     protected Strategie etat;
@@ -86,6 +85,7 @@ public class TortueJoueuse extends Tortue {
             }
         }
     }
+    
     public boolean estSuivie(){
         for (Tortue tortue : tortuesConnues) {
             if (tortue instanceof TortueBalle) {
@@ -97,13 +97,17 @@ public class TortueJoueuse extends Tortue {
         }
         return false;
     }
-    
+
+    public static void reinitialiserCpt() {
+        cpt = 0;
+    }
+
     private double getDistanceEuclidienne(Tortue tortue) {
         return Math.sqrt(Math.pow(this.getX() - tortue.getX(), 2) + Math.pow(this.getY() - tortue.getY(), 2));
     }
 
     @Override
     public String toString() {
-        return nom;
+        return getNom();
     }
 }

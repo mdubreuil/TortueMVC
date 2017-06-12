@@ -16,6 +16,7 @@ public abstract class Jeu extends Observable {
     protected Tortue tortueCourante = null;
     protected Timer timer = new Timer();
     protected Etat etat = Etat.ARRETE;
+    private int duree = 0;
 
     public enum Etat {
         EN_COURS,
@@ -45,6 +46,7 @@ public abstract class Jeu extends Observable {
 
     public void stop() {
         setEtat(Etat.ARRETE);
+        reinitialiser();
     }
 
     public Tortue getTortue(int x, int y){
@@ -66,6 +68,8 @@ public abstract class Jeu extends Observable {
 
     public void reinitialiser() {
         tortues.clear();
+        duree = 0;
+        TortueJoueuse.reinitialiserCpt();
         this.setChanged();
         this.notifyObservers();
     }
@@ -98,5 +102,15 @@ public abstract class Jeu extends Observable {
             courante.setCourante(true);  
         }
         this.tortueCourante = courante;        
+    }
+
+    public int getDuree() {
+        return duree;
+    }
+
+    public void incrementerDuree() {
+        duree++;
+        this.setChanged();
+        this.notifyObservers();
     }
 }

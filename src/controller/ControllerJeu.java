@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.Jeu;
-import model.JeuBalle;
 import model.Tortue;
 import view.VueJeu;
 import view.VueJeuBalle;
@@ -29,13 +28,12 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
 
     // Model    
     protected Jeu jeu = null;
-    
+
     abstract public void initialisationJeu();
 
     public ControllerJeu() {
-        vueStrategie = new VueStrategie();
-
         // Views
+        vueStrategie = new VueStrategie();
         vueTerrain = new VueJeuBalle();
         vueTerrain.addMouseListener(this);
         vueTerrain.addKeyListener(this);
@@ -45,6 +43,7 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     
     public void start() {
         if (jeu == null) {
+            System.out.println("Start");
             initialisationJeu();
             jeu.run();
         } else {
@@ -54,13 +53,18 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     }
     
     public void pause() {
-        System.out.println("Pause");
-        jeu.pause();
+        if (jeu != null) {
+            System.out.println("Pause");
+            jeu.pause();
+        }
     }
 
     public void stop() {
-        System.out.println("Stop");
-        jeu.stop();
+        if (jeu != null) {
+            System.out.println("Stop");
+            jeu.stop();
+            jeu = null;
+        }
     }
 
     public VueJeu getVueFenetre() {

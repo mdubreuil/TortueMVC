@@ -30,6 +30,7 @@ public class ControllerJeuBalle extends ControllerJeu {
     public void initialisationJeu() {
         jeu = new JeuBalle();
         jeu.addObserver(vueTerrain);
+        jeu.addObserver(vueFenetre);
         
         // Ajout de la balle en premier pour que toutes les tortues connaissent la balle
         this.ajouterTortue(new TortueBalleFactory());

@@ -30,7 +30,9 @@ public class JeuBalle extends Jeu {
 
     @Override
     public void run() {
+        // Start game
         setEtat(Etat.EN_COURS);
+        
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -41,6 +43,7 @@ public class JeuBalle extends Jeu {
                             tortue.seDeplacer();
                         }
                     }
+                    incrementerDuree();
                 } else if (etat == Etat.ARRETE) {
                     timer.cancel();
                     timer.purge();

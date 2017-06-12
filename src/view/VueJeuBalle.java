@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 import model.JeuBalle;
+import model.Jeu;
 
 /**
  *
@@ -55,7 +56,7 @@ public class VueJeuBalle extends JPanel implements Observer
     @Override
     public void update(Observable o, Object arg) {
         // Test reset
-        if (o instanceof JeuBalle && ((JeuBalle)o).getTortues().isEmpty()) {
+        if (o instanceof Jeu && ((Jeu) o).getTortues().isEmpty()) {
             tortues.clear();
         }
         this.repaint();
