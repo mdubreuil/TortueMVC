@@ -19,6 +19,7 @@ Simple :
 - Observer/observable sur le terrain
 - Empécher la tortue de quitter le terrain quand elle est dirigée à la souris
 - Lorsque la tortue courante attrape la balle, elle ne doit plus être tortue courante (manipulable avec le clavier)
+- Dessiner le rayon de visibilité des tortues intelligentes
 ---
 Moyen :
 - Implémenter Code couleur tortues (au pif) :
