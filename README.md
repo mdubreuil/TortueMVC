@@ -21,6 +21,12 @@ Simple :
 - Lorsque la tortue courante attrape la balle, elle ne doit plus être tortue courante (manipulable avec le clavier)
 ---
 Moyen :
+- Implémenter Code couleur tortues (au pif) :
+  - Rouge : tortue courante
+  - Bleue : tortue détentrice de la balle
+  - Noire : balle
+  - Jaune : tortues intelligentes
+  - Vert : tortues aléatoires
 - Permettre le changement de stratégie sur l'interface graphique
 - Implémenter les tests unitaires
 - Gérer les états du Jeu avec un enum (EN_COURS, EN_PAUSE, ...) et bloquer les actions utilisateurs en fonction de cet état
@@ -31,7 +37,6 @@ Complexe :
 - Implémenter la stratégie "Intelligente" : se rapprocher de la balle
 ---
 Optionnel :
-- Couleur des tortues selon leur stratégie
 - Peaufiner l'interface graphique (centrer, etc.)
 - Liste Enum pour mettre des noms de tortue rigolos : Turtule, torture ...
 
