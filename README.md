@@ -17,6 +17,8 @@ Simple :
 - Générer le .jar
 - Vérifer que l'évènement keyboard soit compatible pour tous les ordinateur
 - Observer/observable sur le terrain
+- Empécher la tortue de quitter le terrain quand elle est dirigée à la souris
+- Lorsque la tortue courante attrape la balle, elle ne doit plus être tortue courante (manipulable avec le clavier)
 ---
 Moyen :
 - Permettre le changement de stratégie sur l'interface graphique
