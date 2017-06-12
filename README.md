@@ -7,7 +7,6 @@ Projet du module d'ISI3 consacré aux Design Patterns
 ## TODO (par niveau de complexité)
 
 Simple :
-- Déclencher un timer lorsqu'une tortue a la balle
 - Conception des tests unitaires
 - Commenter le code : en-tête de chaque méthode
 - Générer la javadoc
@@ -17,15 +16,8 @@ Simple :
 - Générer le .jar
 - Empécher la tortue de quitter le terrain quand elle est dirigée au clavier
 - Lorsque la tortue courante attrape la balle, elle ne doit plus être tortue courante (manipulable avec le clavier)
-- Dessiner le rayon de visibilité des tortues intelligentes
 ---
 Moyen :
-- Implémenter Code couleur tortues (au pif) :
-  - Rouge : tortue courante
-  - Bleue : tortue détentrice de la balle
-  - Noire : balle
-  - Jaune : tortues intelligentes
-  - Vert : tortues aléatoires
 - Permettre le changement de stratégie sur l'interface graphique
 - Implémenter les tests unitaires
 - Gérer les états du Jeu avec un enum (EN_COURS, EN_PAUSE, ...) et bloquer les actions utilisateurs en fonction de cet état (Reset du controller, jeu, etc.)
@@ -35,5 +27,12 @@ Complexe :
 ---
 Optionnel :
 - Peaufiner l'interface graphique (centrer, etc.)
+- Dessiner le rayon de visibilité des tortues intelligentes
 - Liste Enum pour mettre des noms de tortue rigolos : Turtule, torture ...
+- Implémenter Code couleur tortues (au pif) :
+  - Rouge : tortue courante
+  - Bleue : tortue détentrice de la balle
+  - Noire : balle
+  - Jaune : tortues intelligentes
+  - Vert : tortues aléatoires
 
