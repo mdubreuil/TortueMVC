@@ -17,10 +17,27 @@ public abstract class Strategie {
     public int distance = ControllerJeu.distance;
     public int angle = ControllerJeu.angle;
     protected Random rand = new Random();
+    private TortueJoueuse tortue;
     
     public abstract void deplacer(TortueJoueuse tortue);
+    public abstract int getCouleurStrategie();
     
-    public void avancer(Tortue tortue) {
+    public Strategie(TortueJoueuse tortue) {
+        this.tortue = tortue;
+        this.tortue.setCouleur(getCouleurStrategie());
+    }
+
+    public void avancer() {
+//        if (tortue.getCouleur() != getCouleurStrategie()) {
+//            tortue.setCouleur(getCouleurStrategie());
+//        }
+
+        int x = tortue.getX(), y = tortue.getY();
+        tortue.avancer(distance);
+        while (!isPositionCorrecte()) {
+            tortue.setPosition(x, y);
+            tortue.setDirection(tortue.getDirection());
+        }
 //        try {
 //            Tortue t;
 //            do {
@@ -31,22 +48,16 @@ public abstract class Strategie {
 //        } catch (CloneNotSupportedException ex) {
 //            Logger.getLogger(Strategie.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        int x = tortue.getX(), y = tortue.getY();
-        tortue.avancer(distance);
-        while (!isPositionCorrecte(tortue)) {
-            tortue.setPosition(x, y);
-            tortue.setDirection(tortue.getDirection());
-        }
     }
 
-    private boolean isPositionCorrecte(Tortue tortue) {
+    private boolean isPositionCorrecte() {
         int x = tortue.getX();
         int y = tortue.getY();
 
         return (x >= xMin && x <= xMax && y >= yMin && y <= yMax);
     }
 
-    private void ajusterPosition(Tortue tortue) {
+    private void ajusterPosition() {
         int x = tortue.getX();
         int y = tortue.getY();
 

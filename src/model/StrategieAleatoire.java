@@ -11,6 +11,10 @@ public class StrategieAleatoire extends Strategie {
     protected double seuilDroite = 1./3;
     protected double seuilGauche = 2./3;
 
+    public StrategieAleatoire(TortueJoueuse tortue) {
+        super(tortue);
+    }
+
     @Override
     public void deplacer(TortueJoueuse tortue) {
         double random = rand.nextDouble();
@@ -21,6 +25,11 @@ public class StrategieAleatoire extends Strategie {
             tortue.gauche(angle);
         }
 
-        avancer(tortue);
+        avancer();
+    }
+
+    @Override
+    public int getCouleurStrategie() {
+        return 1;
     }
 }

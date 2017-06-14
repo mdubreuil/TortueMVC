@@ -23,10 +23,12 @@ public class TortueJoueuse extends Tortue
     protected List<TortueBalle> suiveurs;
 
     public TortueJoueuse(String name) {
+        super();
+        couleur = 1;
         nom = name;
         tortuesConnues = new ArrayList();
         suiveurs = new ArrayList();
-        etat = new StrategieAleatoire();
+        etat = new StrategieAleatoire(this);
         cpt++;
     }
 

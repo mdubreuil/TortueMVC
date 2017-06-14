@@ -51,10 +51,9 @@ public class ControllerJeuBalle extends ControllerJeu {
         }
         // La dernière tortue créée est une tortue intelligente
         TortueJoueuse tortue = (TortueJoueuse) factoryJoueuse.ajouterNouvelleTortue(this);
-        tortue.setEtat(new StrategieIntelligente());
-        tortue.setCouleur(5);
+        tortue.setEtat(new StrategieIntelligente(tortue));
         this.ajouterTortue(tortue);
-        vueFenetre.getVueStrategie().visibiliteListeTortues(true); // POur ne pas afficher une liste de tortues vide
+        vueFenetre.getVueStrategie().visibiliteListeTortues(true);
 //        vueFenetre.getVueStrategie().visibiliteCheckBox(true);
     }
     

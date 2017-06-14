@@ -101,9 +101,9 @@ public class VueAdministration extends JPanel implements Observer
             public void itemStateChanged(ItemEvent e) {
                 TortueJoueuse t = controller.getJeu().getTortueParNom(nomTortueSelectionnee);
                 if(e.getStateChange() == ItemEvent.SELECTED) {
-                    t.setEtat(new StrategieIntelligente());
+                    t.setEtat(new StrategieIntelligente(t));
                 } else {
-                    t.setEtat(new StrategieAleatoire());
+                    t.setEtat(new StrategieAleatoire(t));
                 };
             }
         });

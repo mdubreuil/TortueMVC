@@ -9,12 +9,19 @@ import static java.lang.Math.abs;
  */
 
 public class StrategieIntelligente extends StrategieAleatoire {
+
     private final static int RAYON_X = 250;
     private final static int RAYON_Y = 250;
     private int[] coordonneesBalle;
     private int[] positionBalle;
 
-    public StrategieIntelligente() {
+    public StrategieIntelligente(TortueJoueuse tortue) {
+        super(tortue);
+    }
+    
+    @Override
+    public int getCouleurStrategie() {
+        return 5;
     }
 
     public int[] getCoordonneesBalle() {
@@ -91,8 +98,7 @@ public class StrategieIntelligente extends StrategieAleatoire {
             default :
                 break;
         }
-        avancer(t);
-        
+
+        avancer();
     }
-    
 }

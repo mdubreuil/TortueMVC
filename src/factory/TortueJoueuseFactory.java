@@ -45,8 +45,6 @@ public class TortueJoueuseFactory implements TortueFactory {
         for (Tortue t : terrain.getTortues()) {
             tortue.ajouterTortue(t);
         }
-        
-        
         vueStrategie.ajouterTortue(tView);
 
         if (random) {
