@@ -2,6 +2,9 @@ package model;
 
 import static java.lang.Math.abs;
 import java.util.List;
+import static java.lang.Math.abs;
+import static java.lang.Math.abs;
+import static java.lang.Math.abs;
 
 /**
  * @author Mélanie DUBREUIL 4APP

@@ -1,12 +1,10 @@
 package controller;
 
-import factory.TortueFactory;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.Jeu;
-import model.Tortue;
 import view.VueJeu;
 import view.VueJeuBalle;
 import view.VueStrategie;
@@ -74,69 +72,9 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     public Jeu getJeu() {
         return jeu;
     }
-    
-    public void changerCouleur(int n) {
-        getCourante().setCouleur(n);
-    }
-    
-    public void changerPosition(int x, int y) {
-        getCourante().setPosition(x, y);
-    }
-    
+
     public void quitter() {
         System.exit(0);
-    }
-    
-    public void avancer(int v) {
-        getCourante().avancer(v);
-    }
-    
-    public void droite(int v) {
-        getCourante().droite(v);
-    }
-    
-    public void gauche(int v) {
-        getCourante().gauche(v);
-    }
-    
-    public void reinitialiserJeu() {
-        jeu.reinitialiser();
-    }
-
-    protected Tortue getCourante()
-    {
-        return jeu.getTortueCourante();
-    }
-    
-    protected void setCourante(Tortue tortue)
-    {
-        jeu.setTortueCourante(tortue);
-        vueTerrain.setFocusable(true);
-        vueTerrain.requestFocus();
-    }
-
-    public void reinitialiserTortueCourante()
-    {
-        getCourante().reinitialiser();
-    }
-    
-    public void ajouterTortue(TortueFactory factory)
-    {
-        Tortue tortue = factory.ajouterNouvelleTortue(this);
-        jeu.ajouterTortue(tortue);
-//        setCourante(tortue);
-    }
-
-    public void ajouterTortue(Tortue tortue) {
-        jeu.ajouterTortue(tortue);
-//        setCourante(tortue);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        int x = e.getX(), y = e.getY();
-        Tortue tortue = jeu.getTortue(x, y);
-        setCourante(tortue);
     }
 
     @Override
@@ -156,23 +94,4 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     
     @Override
     public void keyTyped(KeyEvent e) {}
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        Tortue tortue = getCourante();
-        if (tortue == null) return;
-        switch (e.getKeyCode()) {            
-            case KeyEvent.VK_RIGHT:
-                tortue.droite(ControllerJeu.angle);
-                break;
-            case KeyEvent.VK_LEFT:
-                tortue.gauche(ControllerJeu.angle);
-                break;
-            case KeyEvent.VK_UP:
-                tortue.avancer(ControllerJeu.distance);
-                break;
-            default:
-                break;
-        }
-    }
 }

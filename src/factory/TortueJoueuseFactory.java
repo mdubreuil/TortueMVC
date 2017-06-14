@@ -32,7 +32,7 @@ public class TortueJoueuseFactory implements TortueFactory {
         Jeu terrain = controller.getJeu();
 
         // Modèle
-        TortueJoueuse tortue = new TortueJoueuse(/*fenetre.getTortueName()*/); // TODO change
+        TortueJoueuse tortue = new TortueJoueuse();
         tortue.addObserver(vueTerrain);
         
         // Vues & listeners de vue
@@ -41,9 +41,6 @@ public class TortueJoueuseFactory implements TortueFactory {
 
         for (Tortue t : terrain.getTortues()) {
             tortue.ajouterTortue(t);
-            if (t instanceof TortueJoueuse) {
-                ((TortueJoueuse)t).ajouterTortue(tortue);
-            }
         }
 
         if (random) {

@@ -137,14 +137,6 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
         //vueTerrain.repaint();
     }
 
-    // efface tout et reinitialise la feuille
-    public void effacer() {
-        controller.reinitialiserJeu();
-        // Replace la tortue au centre
-        Dimension size = vueTerrain.getSize();
-        controller.changerPosition(size.width/2, size.height/2);
-    }
-
     //utilitaires pour installer des boutons et des menus
     public void ajouterBouton(JComponent p, String name, String tooltiptext, String imageName) {
         JButton b;
