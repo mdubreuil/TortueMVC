@@ -24,6 +24,7 @@ Moyen :
 ---
 Complexe :
 - Implémenter un temps minimum de possession de la balle par la tortue
+- Important: Implémenter le pattern "Stategie" pour gérer l'état du jeu
 ---
 Optionnel :
 - Peaufiner l'interface graphique (centrer, etc.)
