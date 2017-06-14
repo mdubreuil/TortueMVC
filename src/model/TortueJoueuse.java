@@ -20,7 +20,6 @@ public class TortueJoueuse extends Tortue
     protected List<Tortue> tortuesConnues;
     protected Strategie etat;
     protected int distanceBalle = 30; // TODO static & majuscules
-    protected int dureePossesion = 0;
     protected List<TortueBalle> suiveurs;
 
     public TortueJoueuse(String name) {
@@ -77,14 +76,6 @@ public class TortueJoueuse extends Tortue
 
     public List<Tortue> getTortuesConnues() {
         return tortuesConnues;
-    }
-
-    public int getDureePossesion() {
-        return dureePossesion;
-    }
-
-    public void reinitialiserDureePossessionBalle() {
-        dureePossesion = 0;
     }
 
     @Override

@@ -33,6 +33,10 @@ public class TortueBalle extends Tortue implements Observer {
         }
 
         if (tortueSuivie != null) {
+            if (getDureePossession() < TortueJoueuse.DUREE_POSSESSION_MIN) {
+                System.out.println(tortueSuivie + " possède la balle depuis moins de " + TortueJoueuse.DUREE_POSSESSION_MIN + " secondes");
+                return;
+            }
             tortueSuivie.deleteObserver(this);
             tortueSuivie.supprimerSuiveur(this);
         }
