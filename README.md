@@ -22,17 +22,9 @@ Moyen :
 - Debugguer l'arrêt du jeu (Ophélie)
 ---
 Complexe :
-- Implémenter un temps minimum de possession de la balle par la tortue
 - Important: Implémenter le pattern "Stategie" pour gérer l'état du jeu
 ---
 Optionnel :
 - Peaufiner l'interface graphique (centrer, etc.)
 - Dessiner le rayon de visibilité des tortues intelligentes
 - Liste Enum pour mettre des noms de tortue rigolos : Turtule, torture ...
-- Implémenter Code couleur tortues (au pif) :
-  - Rouge : tortue courante
-  - Bleue : tortue détentrice de la balle
-  - Noire : balle
-  - Jaune : tortues intelligentes
-  - Vert : tortues aléatoires
-
