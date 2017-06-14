@@ -8,6 +8,7 @@ import model.Tortue;
 import model.TortueJoueuse;
 import view.VueJeu;
 import view.VueJeuBalle;
+import view.VueStrategie;
 import view.VueTortueJoueuse;
 
 /**
@@ -29,11 +30,13 @@ public class TortueJoueuseFactory implements TortueFactory {
     public Tortue ajouterNouvelleTortue(ControllerJeu controller) {
         VueJeu fenetre = controller.getVueFenetre();
         VueJeuBalle vueTerrain = fenetre.getVueTerrain();
+        VueStrategie vueStrategie = fenetre.getVueStrategie();
         Jeu terrain = controller.getJeu();
 
         // Modèle
         TortueJoueuse tortue = new TortueJoueuse(/*fenetre.getTortueName()*/); // TODO change
         tortue.addObserver(vueTerrain);
+        tortue.addObserver(vueStrategie);
         
         // Vues & listeners de vue
         VueTortueJoueuse tView = new VueTortueJoueuse(tortue);
@@ -45,6 +48,9 @@ public class TortueJoueuseFactory implements TortueFactory {
                 ((TortueJoueuse)t).ajouterTortue(tortue);
             }
         }
+        
+        
+        vueStrategie.ajouterTortue(tView);
 
         if (random) {
             // Random position

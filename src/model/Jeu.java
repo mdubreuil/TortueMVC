@@ -99,4 +99,14 @@ public abstract class Jeu extends Observable {
         }
         this.tortueCourante = courante;        
     }
+    
+    public Tortue getTortueParNom(String nom){
+        for (Tortue t : tortues){
+            if(t instanceof TortueJoueuse){
+                TortueJoueuse joueuse = (TortueJoueuse) t;
+                if(joueuse.getNom().equals(nom)) return joueuse;
+            }
+        }
+        return null;
+    }
 }

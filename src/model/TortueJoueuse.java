@@ -49,8 +49,8 @@ public class TortueJoueuse extends Tortue {
         this.tortuesConnues = tortuesConnues;
     }
 
-    public void setEtat(Strategie etat) {
-        this.etat = etat;
+    public void setEtat(Strategie e) {
+        this.etat = e;
         this.setChanged();
         this.notifyObservers();
     }

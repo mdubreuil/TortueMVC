@@ -44,20 +44,23 @@ public class VueJeu extends JFrame implements ActionListener {
 
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
-    private JComboBox listeTortues;
     
     private VueJeuBalle vueTerrain;
-    private VueStrategie vueStrategie;
+    private final VueStrategie vueStrategie;
     
     public VueJeuBalle getVueTerrain() {
         return vueTerrain;
     }
+    
+    public VueStrategie getVueStrategie() {
+        return vueStrategie;
+    }
 
-    public VueJeu(ControllerJeu controller, VueJeuBalle vueTerrain, VueStrategie vueStrategie) {
+    public VueJeu(ControllerJeu controller, VueJeuBalle vueTerrain) {
         super("TurtleSoccer");
         this.controller = controller;
         this.vueTerrain = vueTerrain;
-        this.vueStrategie = vueStrategie;
+        this.vueStrategie =  new VueStrategie(controller);
         
         this.initialisationFenetreJeu();
 

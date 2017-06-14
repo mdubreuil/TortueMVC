@@ -14,6 +14,9 @@ public class StrategieIntelligente extends StrategieAleatoire {
     private int[] coordonneesBalle;
     private int[] positionBalle;
 
+    public StrategieIntelligente() {
+    }
+
     public int[] getCoordonneesBalle() {
         return coordonneesBalle;
     }

@@ -1,13 +1,19 @@
 package controller;
 
 import factory.TortueFactory;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JComboBox;
 import model.Jeu;
-import model.JeuBalle;
+import model.Strategie;
+import model.StrategieAleatoire;
+import model.StrategieIntelligente;
 import model.Tortue;
+import model.TortueJoueuse;
 import view.VueJeu;
 import view.VueJeuBalle;
 import view.VueStrategie;
@@ -25,27 +31,26 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
     // View
     protected static VueJeu vueFenetre = null;
     protected VueJeuBalle vueTerrain = null;
-    protected VueStrategie vueStrategie = null;
 
     // Model    
     protected Jeu jeu = null;
     
     abstract public void initialisationJeu();
 
-    public ControllerJeu() {
-        vueStrategie = new VueStrategie();
-
+    public ControllerJeu(){
         // Views
         vueTerrain = new VueJeuBalle();
         vueTerrain.addMouseListener(this);
         vueTerrain.addKeyListener(this);
 
-        vueFenetre = new VueJeu(this, vueTerrain, vueStrategie);
+        vueFenetre = new VueJeu(this, vueTerrain);
     }
     
     public void start() {
         if (jeu == null) {
             initialisationJeu();
+            vueFenetre.getVueStrategie().visibiliteListeTortues(true);
+            vueFenetre.getVueStrategie().ajouterListeTortuesListener();
             jeu.run();
         } else {
             System.out.println("Resume");
@@ -127,12 +132,26 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
         jeu.ajouterTortue(tortue);
 //        setCourante(tortue);
     }
+    
+    public Strategie getStrategie (String nomTortue){
+        TortueJoueuse t = (TortueJoueuse) jeu.getTortueParNom(nomTortue);
+        return t.getEtat();
+    }
+    
+    public void setStrategie (String nomTortue, Boolean intelligente){
+        TortueJoueuse t = (TortueJoueuse) jeu.getTortueParNom(nomTortue);
+        if(intelligente) {
+            t.setEtat(new StrategieIntelligente());
+        } else {
+            t.setEtat(new StrategieAleatoire());
+        }
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = e.getX(), y = e.getY();
         Tortue tortue = jeu.getTortue(x, y);
-        setCourante(tortue);
+        if(tortue != null) setCourante(tortue);
     }
 
     @Override

@@ -41,6 +41,7 @@ public class ControllerJeuBalle extends ControllerJeu {
             Tortue tortue = factoryJoueuse.ajouterNouvelleTortue(this);
             this.ajouterTortue(tortue);
         }
+        // La dernière tortue créée est une tortue intelligente
         TortueJoueuse tortue = (TortueJoueuse) factoryJoueuse.ajouterNouvelleTortue(this);
         tortue.setEtat(new StrategieIntelligente());
         tortue.setCouleur(5);
