@@ -11,33 +11,35 @@ import java.util.Observer;
 
 public class TortueBalle extends Tortue implements Observer {
 
-    protected Tortue tortueSuivie = null;
+    protected TortueJoueuse tortueSuivie = null;
 
     public TortueBalle() {
         super();
     }
 
-    public TortueBalle(Tortue tortueSuivie) {
+    public TortueBalle(TortueJoueuse tortueSuivie) {
         this();
         setTortueSuivie(tortueSuivie);
     }
 
-    public Tortue getTortueSuivie() {
+    public TortueJoueuse getTortueSuivie() {
         return tortueSuivie;
     }
 
-    public void setTortueSuivie(Tortue suivie) {
+    public void setTortueSuivie(TortueJoueuse suivie) {
         if (suivie == tortueSuivie) {
             return;
         }
 
         if (tortueSuivie != null) {
             tortueSuivie.deleteObserver(this);
+            tortueSuivie.supprimerSuiveur(this);
         }
 
         if (suivie != null) {
             System.out.println(suivie + " a la balle!");
             suivie.addObserver(this);
+            suivie.ajouterSuiveur(this);
             x = suivie.getX();
             y = suivie.getY();
             direction = suivie.getDirection();
@@ -51,8 +53,8 @@ public class TortueBalle extends Tortue implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (o instanceof Tortue) {
-            Tortue tortue = (Tortue) o;
+        if (o instanceof TortueJoueuse) {
+            TortueJoueuse tortue = (TortueJoueuse) o;
             setPosition(tortue.getX(), tortue.getY());
             setDirection(tortue.getDirection());
         }

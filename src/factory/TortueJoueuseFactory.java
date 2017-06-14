@@ -8,7 +8,7 @@ import model.Tortue;
 import model.TortueJoueuse;
 import view.VueJeu;
 import view.VueJeuBalle;
-import view.VueStrategie;
+import view.VueAdministration;
 import view.VueTortueJoueuse;
 
 /**
@@ -30,11 +30,11 @@ public class TortueJoueuseFactory implements TortueFactory {
     public Tortue ajouterNouvelleTortue(ControllerJeu controller) {
         VueJeu fenetre = controller.getVueFenetre();
         VueJeuBalle vueTerrain = fenetre.getVueTerrain();
-        VueStrategie vueStrategie = fenetre.getVueStrategie();
+        VueAdministration vueStrategie = fenetre.getVueStrategie();
         Jeu terrain = controller.getJeu();
 
         // Modèle
-        TortueJoueuse tortue = new TortueJoueuse(/*fenetre.getTortueName()*/); // TODO change
+        TortueJoueuse tortue = new TortueJoueuse();
         tortue.addObserver(vueTerrain);
         tortue.addObserver(vueStrategie);
         
@@ -44,9 +44,6 @@ public class TortueJoueuseFactory implements TortueFactory {
 
         for (Tortue t : terrain.getTortues()) {
             tortue.ajouterTortue(t);
-            if (t instanceof TortueJoueuse) {
-                ((TortueJoueuse)t).ajouterTortue(tortue);
-            }
         }
         
         

@@ -19,13 +19,11 @@ public abstract class Tortue extends Observable implements Cloneable {
 
     public Tortue() {
         reinitialiser();
-        x = VueJeuBalle.width/2; // TODO remove reference by choosing position before calling constructor
-        y = VueJeuBalle.height/2;
     }
 
     public void reinitialiser() {
-        x = 0;
-        y = 0;
+        x = VueJeuBalle.width/2; // TODO remove reference by choosing position before calling constructor
+        y = VueJeuBalle.height/2;
         direction = 90;
         couleur = 0;
         this.setChanged();

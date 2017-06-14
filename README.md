@@ -7,7 +7,6 @@ Projet du module d'ISI3 consacré aux Design Patterns
 ## TODO (par niveau de complexité)
 
 Simple :
-- Déclencher un timer lorsqu'une tortue a la balle
 - Conception des tests unitaires
 - Commenter le code : en-tête de chaque méthode
 - Générer la javadoc
@@ -15,29 +14,24 @@ Simple :
 - Expliquer les choix de conception (design patterns, MVC) (rapport)
 - Détailler les tests (rapport)
 - Générer le .jar
-- Vérifer que l'évènement keyboard soit compatible pour tous les ordinateur
-- Observer/observable sur le terrain
-- Empécher la tortue de quitter le terrain quand elle est dirigée à la souris
+- Empécher la tortue de quitter le terrain quand elle est dirigée au clavier
 - Lorsque la tortue courante attrape la balle, elle ne doit plus être tortue courante (manipulable avec le clavier)
-- Dessiner le rayon de visibilité des tortues intelligentes
 ---
 Moyen :
+- Permettre le changement de stratégie sur l'interface graphique
+- Implémenter les tests unitaires
+---
+Complexe :
+- Implémenter un temps minimum de possession de la balle par la tortue
+---
+Optionnel :
+- Peaufiner l'interface graphique (centrer, etc.)
+- Dessiner le rayon de visibilité des tortues intelligentes
+- Liste Enum pour mettre des noms de tortue rigolos : Turtule, torture ...
 - Implémenter Code couleur tortues (au pif) :
   - Rouge : tortue courante
   - Bleue : tortue détentrice de la balle
   - Noire : balle
   - Jaune : tortues intelligentes
   - Vert : tortues aléatoires
-- Permettre le changement de stratégie sur l'interface graphique
-- Implémenter les tests unitaires
-- Gérer les états du Jeu avec un enum (EN_COURS, EN_PAUSE, ...) et bloquer les actions utilisateurs en fonction de cet état
-- Reset du controller, jeu, etc.
----
-Complexe :
-- Implémenter un temps minimum de possession de la balle par la tortue
-- Implémenter la stratégie "Intelligente" : se rapprocher de la balle
----
-Optionnel :
-- Peaufiner l'interface graphique (centrer, etc.)
-- Liste Enum pour mettre des noms de tortue rigolos : Turtule, torture ...
 

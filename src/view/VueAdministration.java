@@ -1,6 +1,7 @@
 package view;
 
 import controller.ControllerJeu;
+import controller.ControllerJeuBalle;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -19,16 +20,16 @@ import model.TortueJoueuse;
  * @author Mélanie DUBREUIL
  * @author Ophélie EOUZAN
  */
-public class VueStrategie extends JPanel implements Observer 
+public class VueAdministration extends JPanel implements Observer 
 {    
     private final JComboBox listeTortues = new javax.swing.JComboBox();
     private final JCheckBox checkBoxStrategie = new javax.swing.JCheckBox();
     private final JLabel labelInstructions = new javax.swing.JLabel();
-    private final ControllerJeu controller;
+    private final ControllerJeuBalle controller;
     private String nomTortueSelectionnee;
 	
-    public VueStrategie(ControllerJeu controller) {
-        this.controller = controller;
+    public VueAdministration(ControllerJeu controller) {
+        this.controller = (ControllerJeuBalle) controller;
         
         setSize(new Dimension(200,200));
         setPreferredSize(new Dimension(200,200));
@@ -63,18 +64,7 @@ public class VueStrategie extends JPanel implements Observer
         
         // La liste des tortues + case à cocher doivent être cachées tant qu'une partie n'est pas lançée
         this.checkBoxStrategie.setVisible(false);
-        this.listeTortues.setVisible(false); 
-        
-        checkBoxStrategie.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if(e.getStateChange() == ItemEvent.SELECTED) {
-                    controller.setStrategie(nomTortueSelectionnee,true);
-                } else {
-                    controller.setStrategie(nomTortueSelectionnee,false);
-                };
-            }
-        });
+        this.listeTortues.setVisible(false);
     }
     
     public void ajouterListeTortuesListener() {
@@ -93,6 +83,17 @@ public class VueStrategie extends JPanel implements Observer
                         checkBoxStrategie.setVisible(true); 
                     }  
                 }
+            }
+        });
+        
+        checkBoxStrategie.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED) {
+                    controller.setStrategie(nomTortueSelectionnee,true);
+                } else {
+                    controller.setStrategie(nomTortueSelectionnee,false);
+                };
             }
         });
     }

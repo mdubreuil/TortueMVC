@@ -10,21 +10,25 @@ import java.util.List;
  * 
  */
 
-public class TortueJoueuse extends Tortue {
-
-    public static String DEFAULT_NAME = "Toto";
-    public static int cpt = 0;
+public class TortueJoueuse extends Tortue
+{
+    protected static int DUREE_POSSESSION_MIN = 10;
+    protected static String DEFAULT_NAME = "Toto";
+    protected static int cpt = 0;
 
     protected String nom;
     protected List<Tortue> tortuesConnues;
     protected Strategie etat;
-    protected int distanceBalle = 30;
+    protected int distanceBalle = 30; // TODO static & majuscules
+    protected int dureePossesion = 0;
+    protected List<TortueBalle> suiveurs;
 
     public TortueJoueuse(String name) {
         nom = name;
         tortuesConnues = new ArrayList();
+        suiveurs = new ArrayList();
         etat = new StrategieAleatoire();
-        ++cpt;
+        cpt++;
     }
 
     public TortueJoueuse() {
@@ -75,6 +79,14 @@ public class TortueJoueuse extends Tortue {
         return tortuesConnues;
     }
 
+    public int getDureePossesion() {
+        return dureePossesion;
+    }
+
+    public void reinitialiserDureePossessionBalle() {
+        dureePossesion = 0;
+    }
+
     @Override
     public void avancer(int dist) {
         super.avancer(dist);
@@ -86,24 +98,44 @@ public class TortueJoueuse extends Tortue {
             }
         }
     }
+    
     public boolean estSuivie(){
-        for (Tortue tortue : tortuesConnues) {
-            if (tortue instanceof TortueBalle) {
-                TortueBalle balle = (TortueBalle) tortue;
-                if(balle.getX() == this.getX() && balle.getY() == this.getY()){
-                    return true;
-                }
+        for (TortueBalle balle : suiveurs) {
+            if (balle.getX() == this.getX() && balle.getY() == this.getY()){ // condition inutile normalement, grâce au pattern observer/observable (tout le temps vrai)
+                return true;
             }
         }
+
         return false;
     }
+
+    public List<TortueBalle> getSuiveurs() {
+        return suiveurs;
+    }
     
+    public void setSuiveurCourant(TortueBalle balle) {
+        this.suiveurs.clear();
+        ajouterSuiveur(balle);
+    }
+
+    public void ajouterSuiveur(TortueBalle balle) {
+        this.suiveurs.add(balle);
+    }
+    
+    public void supprimerSuiveur(TortueBalle balle) {
+        this.suiveurs.remove(balle);
+    }
+
+    public static void reinitialiserCpt() {
+        cpt = 0;
+    }
+
     private double getDistanceEuclidienne(Tortue tortue) {
         return Math.sqrt(Math.pow(this.getX() - tortue.getX(), 2) + Math.pow(this.getY() - tortue.getY(), 2));
     }
 
     @Override
     public String toString() {
-        return nom;
+        return getNom();
     }
 }
