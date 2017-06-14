@@ -18,7 +18,6 @@ Simple :
 - Lorsque la tortue courante attrape la balle, elle ne doit plus être tortue courante (manipulable avec le clavier)
 ---
 Moyen :
-- Permettre le changement de stratégie sur l'interface graphique
 - Implémenter les tests unitaires
 - Debugguer l'arrêt du jeu (Ophélie)
 ---
