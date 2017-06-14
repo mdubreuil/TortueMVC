@@ -20,6 +20,7 @@ Simple :
 Moyen :
 - Permettre le changement de stratégie sur l'interface graphique
 - Implémenter les tests unitaires
+- Debugguer l'arrêt du jeu (Ophélie)
 ---
 Complexe :
 - Implémenter un temps minimum de possession de la balle par la tortue
