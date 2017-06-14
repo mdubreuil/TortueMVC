@@ -12,6 +12,7 @@ import java.util.Observer;
 public class TortueBalle extends Tortue implements Observer {
 
     protected TortueJoueuse tortueSuivie = null;
+    protected int dureePossession = 0;
 
     public TortueBalle() {
         super();
@@ -46,9 +47,22 @@ public class TortueBalle extends Tortue implements Observer {
         }
 
         tortueSuivie = suivie;
+        dureePossession = 0;
 
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public void incrementerDureePossession() {
+        if (getTortueSuivie() != null) {
+            dureePossession++;
+            this.setChanged();
+            this.notifyObservers();
+        }
+    }
+
+    public int getDureePossession() {
+        return dureePossession;
     }
 
     @Override

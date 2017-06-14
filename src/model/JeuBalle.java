@@ -46,7 +46,9 @@ public class JeuBalle extends Jeu
                         }
                     }
                     incrementerDuree();
+                    getBalle().incrementerDureePossession();
                 } else if (etat == Etat.ARRETE) {
+                    reinitialiser();
                     timer.cancel();
                     timer.purge();
                 }
@@ -71,8 +73,9 @@ public class JeuBalle extends Jeu
     
     @Override
     public void reinitialiser() {
+        joueurCourant = null;
         joueurs.clear();
-        joueurCourant.reinitialiser();
+//        joueurCourant.reinitialiser();
         TortueJoueuse.reinitialiserCpt();
         super.reinitialiser();
     }
@@ -117,5 +120,12 @@ public class JeuBalle extends Jeu
 
     public TortueBalle getBalle() {
         return balle;
+    }
+    
+    public TortueJoueuse getTortueParNom(String nom){
+        for (TortueJoueuse joueuse : joueurs) {
+            if (joueuse.getNom().equals(nom)) return joueuse;
+        }
+        return null;
     }
 }

@@ -19,6 +19,7 @@ public class TortueBalleFactory implements TortueFactory {
 
         TortueBalle tortue = new TortueBalle();
         tortue.addObserver(terrain);
+        tortue.addObserver(controller.getVueFenetre().getVueStrategie());
 
         VueTortueBalle tView = new VueTortueBalle(tortue);
         terrain.ajouterTortues(tView);

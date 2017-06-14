@@ -23,9 +23,14 @@ public class ControllerJeuBalle extends ControllerJeu {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
-                ControllerJeuBalle controller = new ControllerJeuBalle(/*new TortueJoueuseFactory()*/);
+                ControllerJeuBalle controller = new ControllerJeuBalle();
             }
         });
+    }
+    
+    @Override
+    public JeuBalle getJeu() {
+        return (JeuBalle) jeu;
     }
 
     @Override
@@ -49,20 +54,18 @@ public class ControllerJeuBalle extends ControllerJeu {
         tortue.setEtat(new StrategieIntelligente());
         tortue.setCouleur(5);
         this.ajouterTortue(tortue);
-        vueFenetre.getVueStrategie().visibiliteListeTortues(true);
-        vueFenetre.getVueStrategie().ajouterListeTortuesListener();
+        vueFenetre.getVueStrategie().visibiliteListeTortues(true); // POur ne pas afficher une liste de tortues vide
+//        vueFenetre.getVueStrategie().visibiliteCheckBox(true);
     }
     
     public void ajouterTortue(TortueFactory factory)
     {
         Tortue tortue = factory.ajouterNouvelleTortue(this);
         getJeu().ajouterTortue(tortue);
-//        setCourante(tortue);
     }
 
     public void ajouterTortue(Tortue tortue) {
         getJeu().ajouterTortue(tortue);
-//        setCourante(tortue);
     }
 
     @Override
@@ -89,19 +92,6 @@ public class ControllerJeuBalle extends ControllerJeu {
         vueTerrain.requestFocus();
     }
 
-    public void reinitialiserTortueCourante()
-    {
-        getCourante().reinitialiser();
-    }
-    
-    public void changerCouleur(int n) {
-        getCourante().setCouleur(n);
-    }
-    
-    public void changerPosition(int x, int y) {
-        getCourante().setPosition(x, y);
-    }
-    
     @Override
     public void keyReleased(KeyEvent e) {
         Tortue tortue = getCourante();
@@ -118,25 +108,6 @@ public class ControllerJeuBalle extends ControllerJeu {
                 break;
             default:
                 break;
-        }
-    }
-    
-    @Override
-    public JeuBalle getJeu() {
-        return (JeuBalle) jeu;
-    }
-    
-    public Strategie getStrategie (String nomTortue){
-        TortueJoueuse t = (TortueJoueuse) jeu.getTortueParNom(nomTortue);
-        return t.getEtat();
-    }
-    
-    public void setStrategie (String nomTortue, Boolean intelligente){
-        TortueJoueuse t = (TortueJoueuse) jeu.getTortueParNom(nomTortue);
-        if(intelligente) {
-            t.setEtat(new StrategieIntelligente());
-        } else {
-            t.setEtat(new StrategieAleatoire());
         }
     }
 }
