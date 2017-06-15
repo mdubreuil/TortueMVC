@@ -1,9 +1,14 @@
 package model;
 
+import model.etat.JeuFini;
+import model.etat.JeuEnCours;
+import model.etat.Etat;
+import model.etat.JeuEnPause;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Mélanie DUBREUIL 4APP
@@ -12,35 +17,46 @@ import java.util.Timer;
 
 public abstract class Jeu extends Observable
 {
-    private Timer timer = new Timer();
-    private Etat etat = Etat.ARRETE;
+    private Timer timer; // = new Timer();
+    private Etat etat = new JeuEnCours();
     private int duree = 0;
     private List<Tortue> tortues = new ArrayList();
 
-    public enum Etat {
-        EN_COURS,
-        EN_PAUSE,
-        ARRETE
+    protected abstract TimerTask getTimerTask();
+    protected abstract int getTimeIncrement();
+
+    private void lancer() {
+        this.etat.jouerJeu(this);
     }
 
-    public abstract void run();
-
     public void pause() {
-        setEtat(Etat.EN_PAUSE);
+        setEtat(new JeuEnPause());
     }
     
     public void resume() {
-        setEtat(Etat.EN_COURS);
+        setEtat(new JeuEnCours());
     }
 
     public void stop() {
-        setEtat(Etat.ARRETE);
+        setEtat(new JeuFini());
+    }
+    
+    public void initialisation() throws InterruptedException {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(getTimerTask(), 0, getTimeIncrement());
     }
 
     public void reinitialiser() {
         duree = 0;
+        reinitialiserTimer();
         this.setChanged();
         this.notifyObservers();
+    }
+    
+    public void reinitialiserTimer() {
+        getTimerTask().cancel();
+        timer.cancel();
+        timer.purge();
     }
     
     public Tortue getTortue(int x, int y) {
@@ -59,6 +75,7 @@ public abstract class Jeu extends Observable
 
     public void setEtat(Etat etat) {
         this.etat = etat;
+        lancer();
     }
 
     public int getDuree() {

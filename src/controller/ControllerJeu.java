@@ -40,7 +40,6 @@ public abstract class ControllerJeu implements MouseListener, KeyListener {
         if (jeu == null) {
             System.out.println("Start");
             initialisationJeu();
-            jeu.run();
         } else {
             System.out.println("Resume");
             jeu.resume();

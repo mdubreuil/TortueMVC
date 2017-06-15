@@ -18,52 +18,45 @@ public class JeuBalle extends Jeu
     private TortueBalle balle = null;
     private int nbJoueurs = 10;
 
-    public JeuBalle() {
+    public JeuBalle() throws InterruptedException {
         joueurs = new ArrayList();
         balle = new TortueBalle();
+        initialisation();
     }
 
-    public JeuBalle(TortueJoueuse courante) {
+    public JeuBalle(TortueJoueuse courante) throws InterruptedException {
         this();
         joueurCourant = courante;
         ajouterTortue(courante);
     }
-
+    
     @Override
-    public void run() {
-        // Start game
-        Timer timer = getTimer();
-        setEtat(Etat.EN_COURS);
-        
-        timer.scheduleAtFixedRate(new TimerTask() {
+    protected TimerTask getTimerTask() {
+        return new TimerTask() {
             @Override
             public void run() {
-                Etat etat = getEtat();
-                if (etat == Etat.EN_COURS) {
-                    for (TortueJoueuse joueur: getJoueurs()) {
-                        if (joueur != getJoueurCourant()) {
-                            joueur.seDeplacer();
-                        }
+                for (TortueJoueuse joueur: getJoueurs()) {
+                    if (joueur != getJoueurCourant()) {
+                        joueur.seDeplacer();
                     }
-                    incrementerDuree();
-                    getBalle().incrementerDureePossession();
-                } else if (etat == Etat.ARRETE) {
-                    reinitialiser();
-                    timer.cancel();
-                    timer.purge();
                 }
+                incrementerDuree();
+                getBalle().incrementerDureePossession();
             }
-        }, 0, 1000); // Wait 1 second between each tick
+        };
     }
-    
+
+    @Override
+    protected int getTimeIncrement() {
+        return 1000;
+    }
+
     public void setTortueCourante(TortueJoueuse courante) {
         // S'il y avait déjà une tortue courante, il faut lui dire qu'elle ne l'est plus
         if (joueurCourant != null) {
             joueurCourant.setCourante(false);
             joueurCourant.setCouleur(joueurCourant.getEtat().getCouleurStrategie());
         }
-//        // Si la tortue est une balle, elle ne peut pas être la tortue courante
-//        if(courante instanceof TortueBalle) return;
 
         // Si l'utilisateur a bien sélectionné une tortue, on la met en tant que tortue courante
         if(courante != null){
@@ -77,7 +70,6 @@ public class JeuBalle extends Jeu
     public void reinitialiser() {
         joueurCourant = null;
         joueurs.clear();
-//        joueurCourant.reinitialiser();
         TortueJoueuse.reinitialiserCpt();
         super.reinitialiser();
     }
