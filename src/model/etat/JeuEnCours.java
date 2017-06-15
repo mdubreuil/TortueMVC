@@ -14,6 +14,7 @@ public class JeuEnCours extends Etat {
     @Override
     public void jouerJeu(Jeu jeu) {
         try {
+            jeu.reinitialiserTimer();
             jeu.initialisation();
         } catch (InterruptedException ex) {
             Logger.getLogger(JeuEnCours.class.getName()).log(Level.SEVERE, null, ex);

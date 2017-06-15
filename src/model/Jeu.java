@@ -17,7 +17,7 @@ import java.util.TimerTask;
 
 public abstract class Jeu extends Observable
 {
-    private Timer timer; // = new Timer();
+    private Timer timer = new Timer();
     private Etat etat = new JeuEnCours();
     private int duree = 0;
     private List<Tortue> tortues = new ArrayList();
