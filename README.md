@@ -14,15 +14,13 @@ Simple :
 - Expliquer les choix de conception (design patterns, MVC) (rapport)
 - Détailler les tests (rapport)
 - Générer le .jar
-- Empécher la tortue de quitter le terrain quand elle est dirigée au clavier
-- Lorsque la tortue courante attrape la balle, elle ne doit plus être tortue courante (manipulable avec le clavier)
 ---
 Moyen :
 - Implémenter les tests unitaires
-- Debugguer l'arrêt du jeu (Ophélie)
+- Empécher la tortue de quitter le terrain quand elle est dirigée au clavier
 ---
 Complexe :
-- Important: Implémenter le pattern "Stategie" pour gérer l'état du jeu
+- Différencier timer de temps et timer d'avancement du jeu
 ---
 Optionnel :
 - Peaufiner l'interface graphique (centrer, etc.)
