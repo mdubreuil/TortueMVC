@@ -48,6 +48,7 @@ public abstract class Jeu extends Observable
 
     public void reinitialiser() {
         duree = 0;
+        tortues.clear();
         reinitialiserTimer();
         this.setChanged();
         this.notifyObservers();

@@ -17,7 +17,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -48,7 +47,7 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
 
     public static final Dimension VGAP = new Dimension(1,5);
     public static final Dimension HGAP = new Dimension(5,1);
-    private JComboBox listeTortues;
+
     private JLabel labelTemps;
     private VueJeuBalle vueTerrain;
     private final VueAdministration vueStrategie;
