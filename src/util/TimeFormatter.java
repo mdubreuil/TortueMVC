@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package util;
 
 /**
- *
- * @author Epulapp
+ * Comporte des méthodes permettant d'afficher et de gérer l'objet Timer
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public class TimeFormatter {
     
@@ -25,8 +20,8 @@ public class TimeFormatter {
     
     /**
     * Permet de récupérer le temps écoulé depuis le start au format MM:SS (ex : 00:06 | 01:42 | 12:21)
-     * @param timeChoice
-     * @param value
+     * @param timeChoice unité de temps que l'on souhaite obtenir
+     * @param value valeur du temps à traduire
     * @return le temps écoulé au format string
     */
     public static String getMinuteSecondeFormat(TimeChoice timeChoice, int value)
@@ -36,8 +31,8 @@ public class TimeFormatter {
     
     /**
     * Permet de récupérer le nombre de minute écoulée depuis le start (ex : 01 | 10 | 42)
-     * @param timeChoice
-     * @param value
+     * @param timeChoice unité de temps que l'on souhaite obtenir
+     * @param value valeur de temps à traduire
     * @return le nombre de minute au format string
     */
     public static String getMinute(TimeChoice timeChoice, int value)
@@ -56,8 +51,8 @@ public class TimeFormatter {
 
     /**
     * Permet de récupérer le nombre de seconde écoulée depuis le start (ex : 01 | 10 | 42)
-     * @param timeChoice
-     * @param value
+     * @param timeChoice unité de temps
+     * @param value valeur à traduire
     * @return le nombre de seconde au format string
     */
     public static String getSeconde(TimeChoice timeChoice, int value)
@@ -74,6 +69,13 @@ public class TimeFormatter {
         return sec + seconde;
     }
     
+    /**
+     * Transforme une durée en secondes
+     *
+     * @param timeChoice unité de la durée que l'on veut traduire (ex: minutes)
+     * @param value durée à traduire
+     * @return long : durée en secondes
+     */
     private static long getSecondeByTimeSet(TimeChoice timeChoice, int value)
     {
         long seconde = -1;

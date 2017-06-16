@@ -5,9 +5,8 @@ import java.awt.Graphics;
 import model.TortueBalle;
 
 /**
- *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * Correspondant à la vue de la tortue joueuse : Cercle plein
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public class VueTortueBalle extends VueTortue {
     
@@ -15,7 +14,12 @@ public class VueTortueBalle extends VueTortue {
         super(tortue);
         setFocusable(false);
     }
-
+    
+    /**
+     * Dessine une TortueBalle dans la vue du jeu
+     *
+     * @param graphics composant graphique que l'on souhaite dessiner
+     */
     @Override
     public void dessinerTortue(Graphics graphics) {
         if (graphics == null) return;

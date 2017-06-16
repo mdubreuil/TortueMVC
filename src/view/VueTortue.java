@@ -11,9 +11,8 @@ import javax.swing.JComponent;
 import model.Tortue;
 
 /**
- *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * Vue générique pour une tortue : triangle plein
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public abstract class VueTortue extends JComponent implements Observer
 {    
@@ -28,7 +27,12 @@ public abstract class VueTortue extends JComponent implements Observer
     public Tortue getTortue() {
         return tortue;
     }
-
+    
+    /**
+     * Dessine une Tortue dans la vue du jeu
+     *
+     * @param graphics graphique que l'on souhaite dessiner
+     */
     public void dessinerTortue(Graphics graphics) {
         if (graphics == null) return;
 
@@ -62,6 +66,12 @@ public abstract class VueTortue extends JComponent implements Observer
         graphics.fillPolygon(arrow);
     }
     
+    /**
+     * Associe une couleur à un entier
+     *
+     * @param c couleur à décoder
+     * @return objet Color
+     */
     public Color decoderCouleur(int c) {
         switch(c) {
             case 0: return(Color.black);
@@ -81,7 +91,5 @@ public abstract class VueTortue extends JComponent implements Observer
     }
     
     @Override
-    public void update(Observable o, Object arg) {
-        // Do nothing by default
-    }
+    public void update(Observable o, Object arg) {}
 }

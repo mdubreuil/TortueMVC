@@ -11,13 +11,12 @@ import javax.swing.JPanel;
 import model.Jeu;
 
 /**
- *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * Vue matérialisant le jeu de balles
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public class VueJeuBalle extends JPanel implements Observer
 {
-    protected List<VueTortue> tortues; // la liste des sous-vues
+    protected List<VueTortue> tortues;
     public static int width = 600;
     public static int height = 400;
 	
@@ -28,15 +27,25 @@ public class VueJeuBalle extends JPanel implements Observer
 
         tortues = new ArrayList();
     }
-
+    
+    /**
+     * Dessine les tortues dans le jeu de balles
+     *
+     * @param g graphique que l'on souhaite dessiner
+     */
     public void montrerTortues(Graphics g) {
         for (VueTortue t : tortues) {
             t.dessinerTortue(g);
         }
     }
-
-    public void ajouterTortues(VueTortue o) {
-        tortues.add(o);
+    
+    /**
+     * Ajoute une tortue dans la vue du jeu de balles
+     *
+     * @param tortue à ajouter
+     */
+    public void ajouterTortues(VueTortue tortue) {
+        tortues.add(tortue);
     }
 
     @Override
@@ -54,7 +63,7 @@ public class VueJeuBalle extends JPanel implements Observer
 
     @Override
     public void update(Observable o, Object arg) {
-        // Test reset
+        // La vue du jeu doit être réinitialisée
         if (o instanceof Jeu && ((Jeu)o).getTortues().isEmpty()) {
             tortues.clear();
         }

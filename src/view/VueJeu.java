@@ -31,9 +31,8 @@ import model.Jeu;
 import util.TimeFormatter;
 
 /**
- *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * Fenêtre de l'application
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public class VueJeu extends JFrame implements ActionListener, Observer {
     /**
@@ -52,14 +51,24 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
     private VueJeuBalle vueTerrain;
     private final VueAdministration vueStrategie;
     
+    /**
+     * Retourne la vue du terrain de jeu
+     *
+     * @return VueJeuBalle
+     */
     public VueJeuBalle getVueTerrain() {
         return vueTerrain;
     }
     
+    /**
+     * Retourne la vue peremttant de modifier la stratégie des tortues
+     *
+     * @return VueStrategie
+     */
     public VueAdministration getVueStrategie() {
         return vueStrategie;
     }
-
+    
     public VueJeu(ControllerJeu controller, VueJeuBalle vueTerrain) {
         super("TurtleSoccer");
         this.controller = controller;
@@ -76,7 +85,10 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
             }
         });
     }
-
+    
+    /**
+     * Itinialisation de la vue du jeu : ajout des composants Swing
+     */
     public void initialisationFenetreJeu() {
         getContentPane().setLayout(new BorderLayout(10,10));
 
@@ -120,8 +132,9 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
         setVisible(true);
     }
 
-    /** la gestion des actions des boutons
-     * @param e */
+    /** Gestion des actions des boutons
+     * @param e évènement utilisateur
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -137,10 +150,16 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
         } else if (c.equals("Quitter")) {
             controller.quitter();
         }
-        //vueTerrain.repaint();
     }
 
-    //utilitaires pour installer des boutons et des menus
+    /**
+     * Utilisataire permettant d'ajouter les boutons
+     *
+     * @param p JComponent
+     * @param name String
+     * @param tooltiptext String
+     * @param imageName String
+     */
     public void ajouterBouton(JComponent p, String name, String tooltiptext, String imageName) {
         JButton b;
         if ((imageName == null) || (imageName.equals(""))) {
@@ -161,7 +180,15 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
         b.setMargin(new Insets(0,0,0,0));
         b.addActionListener(this);
     }
-
+    
+    /**
+     * Utilisataire permettant d'ajouter un item au menu
+     *
+     * @param m JMenu
+     * @param label String
+     * @param command Command
+     * @param key Key
+     */
     public void ajouterObjetMenu(JMenu m, String label, String command, int key) {
         JMenuItem menuItem;
         menuItem = new JMenuItem(label);
@@ -177,12 +204,22 @@ public class VueJeu extends JFrame implements ActionListener, Observer {
             }
         }
     }
-
+    
+    /**
+     * Ajoute une tortue dans la vue du jeu
+     *
+     * @param tortue à ajouter
+     */
     public void ajouterTortue(VueTortue tortue) {
         vueTerrain.ajouterTortues(tortue);
     }
-
-    public void ajouterFeuilleDessin(VueJeuBalle vueTerrain) {
+    
+    /**
+     * Ajoute la vue du jeu au centre de la fenêtre
+     *
+     * @param vueTerrain vue d'un jeu de balles
+     */
+    public void ajouterVueJeu(VueJeuBalle vueTerrain) {
         this.vueTerrain = vueTerrain;
         getContentPane().add(this.vueTerrain, "Center");
     }

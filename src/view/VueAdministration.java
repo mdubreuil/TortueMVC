@@ -11,7 +11,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.Strategie;
 import model.StrategieAleatoire;
 import model.StrategieIntelligente;
 import model.TortueBalle;
@@ -20,9 +19,8 @@ import util.TimeFormatter;
 import util.TimeFormatter.TimeChoice;
 
 /**
- *
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * Vue permettant de changer la stratégie des tortues
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public class VueAdministration extends JPanel implements Observer 
 {    
@@ -32,7 +30,11 @@ public class VueAdministration extends JPanel implements Observer
     private final JLabel labelTimerBalle = new javax.swing.JLabel();
     private final ControllerJeuBalle controller;
     private String nomTortueSelectionnee;
-	
+    
+    /**
+     * Initialise la vue Administration
+     * @param controller controller à associer à la vue
+     */
     public VueAdministration(ControllerJeu controller) {
         this.controller = (ControllerJeuBalle) controller;
         
@@ -40,7 +42,7 @@ public class VueAdministration extends JPanel implements Observer
         setPreferredSize(new Dimension(200,200));
         checkBoxStrategie.setText("Intelligente ?");        
         labelInstructions.setText("Changement de stratégie");
-        this.updateLabelTimerBalle();
+        this.changerDureePossessionBalle();
         this.ajouterListeners();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -76,6 +78,9 @@ public class VueAdministration extends JPanel implements Observer
         this.listeTortues.setVisible(false);
     }
     
+    /**
+     * Ajoute les listeners à la vue : changement de checkbox et sélection d'un item dans la liste des tortues
+     */
     public void ajouterListeners() {
         // Listener sur la liste des tortues
         listeTortues.addItemListener(new ItemListener() {
@@ -109,23 +114,48 @@ public class VueAdministration extends JPanel implements Observer
         });
     }
     
+    /**
+     * Cache/Rend visible la liste des tortues dans la vue
+     *
+     * @param visible booléen : la liste des tortues doit être visible ou non
+     */
     public void visibiliteListeTortues(boolean visible){
         this.listeTortues.setVisible(visible);
     }
     
+    /**
+     * Cache/Rend visible la checkbox permettant de changer la stratégie d'une tortue
+     *
+     * @param visible booléen : la checkbox doit être visible ou non
+     */
     public void visibiliteCheckBox(boolean visible){
         this.checkBoxStrategie.setVisible(visible);
     }
     
+    /**
+     * Ajoute une tortue dans la la liste des tortues
+     *
+     * @param tVue tortue à ajouter
+     */
     public void ajouterTortue(VueTortue tVue){
         TortueJoueuse tortue = (TortueJoueuse) tVue.getTortue();
         listeTortues.addItem(tortue.getNom());
     }
-
+    
+    /**
+     * Récupère le composant JComboBox correspondant à la liste des tortues
+     *
+     * @return liste des tortues
+     */
     public JComboBox getListeTortues() {
         return listeTortues;
     }
-
+    
+    /**
+     * Récupère le composant JCheckBox permettant de changer la stratégie
+     *
+     * @return JCheckBox
+     */
     public JCheckBox getCheckBoxStrategie() {
         return checkBoxStrategie;
     }
@@ -133,11 +163,14 @@ public class VueAdministration extends JPanel implements Observer
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof TortueBalle) {
-            this.updateLabelTimerBalle();
+            this.changerDureePossessionBalle();
         }
     }
     
-    private void updateLabelTimerBalle() {
+    /**
+     * Met à jour l'affichage de la durée de possession de la balle
+     */
+    private void changerDureePossessionBalle() {
         if (controller.getJeu() != null && controller.getJeu().getBalle() != null) {
             TortueBalle balle = controller.getJeu().getBalle();
             TortueJoueuse detenteurBalle = balle.getTortueSuivie();

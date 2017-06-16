@@ -12,8 +12,8 @@ import view.VueAdministration;
 import view.VueTortueJoueuse;
 
 /**
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * Pattern stratégie : instancie des tortues joueuses dans le jeu de balles
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public class TortueJoueuseFactory implements TortueFactory {
 
@@ -25,7 +25,13 @@ public class TortueJoueuseFactory implements TortueFactory {
     public TortueJoueuseFactory(boolean random) {
         this.random = random;
     }
-
+    
+     /**
+     * Ajoute des tortues (modèle et vue) + observateurs au controller de jeu
+     * Affecte également une position aléatoire
+     * 
+     * @param controller dans lequel on souhaite ajouter une totue
+     */
     @Override
     public Tortue ajouterNouvelleTortue(ControllerJeu controller) {
         VueJeu fenetre = controller.getVueFenetre();

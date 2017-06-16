@@ -11,15 +11,14 @@ import javax.swing.SwingUtilities;
 import model.*;
 
 /**
- * Class Main = Controlleur
- * @author Mélanie DUBREUIL 4APP
- * @author Ophélie EOUZAN 4APP
+ * Controller du jeu de balle : fait le lien avec les actions utilisateur de la vue du jeu de balles et les méthodes métier spécifiques au jeu de balles
+ * 
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
-
 public class ControllerJeuBalle extends ControllerJeu {
 
     /**
-     * @param args
+     * @param args arguments de la méthode main
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable(){
@@ -30,11 +29,19 @@ public class ControllerJeuBalle extends ControllerJeu {
         });
     }
     
+     /**
+     * Retourne le jeu de balles courant
+     *
+     * @return JeuBalle
+     */
     @Override
     public JeuBalle getJeu() {
         return (JeuBalle) jeu;
     }
-
+    
+     /**
+     * Initialisation du jeu de balles : ajout des observateurs, des tortues
+     */
     @Override
     public void initialisationJeu() {
         try {
@@ -57,22 +64,36 @@ public class ControllerJeuBalle extends ControllerJeu {
             tortue.setEtat(new StrategieIntelligente(tortue));
             this.ajouterTortue(tortue);
             vueFenetre.getVueStrategie().visibiliteListeTortues(true);
-//        vueFenetre.getVueStrategie().visibiliteCheckBox(true);
         } catch (InterruptedException ex) {
             Logger.getLogger(ControllerJeuBalle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+     /**
+     * Utilise la factory pour ajouter une nouvelle tortue au jeu
+     *
+     * @param factory factory s'occupant de l'ajout de tortue
+     */
     public void ajouterTortue(TortueFactory factory)
     {
         Tortue tortue = factory.ajouterNouvelleTortue(this);
         getJeu().ajouterTortue(tortue);
     }
-
+    
+     /**
+     * Ajoute une tortue au jeu de balles
+     *
+     * @param tortue Tortue à ajouter
+     */
     public void ajouterTortue(Tortue tortue) {
         getJeu().ajouterTortue(tortue);
     }
-
+    
+     /**
+     * Sélectionne la tortue courante suite à un clic utilisateur
+     *
+     * @param e Clic de souris de l'utilisateur
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = e.getX(), y = e.getY();
@@ -85,18 +106,33 @@ public class ControllerJeuBalle extends ControllerJeu {
         }
     }
     
+     /**
+     * Récupère la tortue courante du jeu
+     *
+     * @return tortue courante
+     */
     protected TortueJoueuse getCourante()
     {
         return getJeu().getTortueCourante();
     }
     
+     /**
+     * Modifie la tortue courante du jeu
+     *
+     * @param tortue nouvelle tortue courante
+     */
     protected void setCourante(TortueJoueuse tortue)
     {
         getJeu().setTortueCourante(tortue);
         vueTerrain.setFocusable(true);
         vueTerrain.requestFocus();
     }
-
+    
+     /**
+     * Déplace la tortue en fonction d'une action clavier
+     *
+     * @param e touche du clavier appuyée par l'utilisateur
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         Tortue tortue = getCourante();

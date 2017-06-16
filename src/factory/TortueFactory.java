@@ -5,8 +5,8 @@ import controller.ControllerJeu;
 import model.Tortue;
 
 /**
- * @author Mélanie DUBREUIL
- * @author Ophélie EOUZAN
+ * Pattern Factory
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
 public interface TortueFactory {
     public Tortue ajouterNouvelleTortue(ControllerJeu controller);

@@ -4,11 +4,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- *
- * @author Mélanie DUBREUIL 4APP
- * @author Ophélie EOUZAN 4APP
+ * Correspondant à une tortue balle : suit une autre tortue et est passé à une autre lorsqu'elle est suffisament proche
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
-
 public class TortueBalle extends Tortue implements Observer {
 
     protected TortueJoueuse tortueSuivie = null;
@@ -26,7 +24,12 @@ public class TortueBalle extends Tortue implements Observer {
     public TortueJoueuse getTortueSuivie() {
         return tortueSuivie;
     }
-
+    
+    /**
+     * Paramètre la tortue suivant la balle
+     *
+     * @param suivie : TortueJoueuse suivant la balle
+     */
     public void setTortueSuivie(TortueJoueuse suivie) {
         if (suivie == tortueSuivie) {
             return;
@@ -56,7 +59,10 @@ public class TortueBalle extends Tortue implements Observer {
         this.setChanged();
         this.notifyObservers();
     }
-
+    
+    /**
+     * Incrémente la durée de possession de la balle par la tortue la possédant
+     */
     public void incrementerDureePossession() {
         if (getTortueSuivie() != null) {
             dureePossession++;
@@ -64,7 +70,12 @@ public class TortueBalle extends Tortue implements Observer {
             this.notifyObservers();
         }
     }
-
+    
+    /**
+     * Retourne la durée de possession de la balle
+     *
+     * @return int : durée de possession
+     */
     public int getDureePossession() {
         return dureePossession;
     }

@@ -2,10 +2,9 @@
 package model;
 
 /**
- * @author Mélanie DUBREUIL 4APP
- * @author Ophélie EOUZAN 4APP
+ * A implémenter : énumération des couleurs
+ * @author Mélanie DUBREUIL et Ophélie EOUZAN - POLYTECH LYON 4APP - 2017
  */
-
 public class Couleur {
     // TODO
 //    case 0: return(Color.black);
