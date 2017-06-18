@@ -5,6 +5,7 @@ Par Mélanie DUBREUIL et Ophélie EOUZAN, POLYTECH LYON, 4APP
 * Proposer un jeu de balles
 * ~~Proposer un jeu de foot~~
 
+---
 ## Fonctionnalités du jeu de balles
 - Possibilité de lancer, arrêter, mettre en pause une partie
 - Timer indiquant le temps de jeu
@@ -14,9 +15,8 @@ Par Mélanie DUBREUIL et Ophélie EOUZAN, POLYTECH LYON, 4APP
 - Possibilité de changer la stratégie d'une tortue : la sélectionner dans la liste déroulante puis cocher/décocher la case
 - Code couleur : tortue verte = intelligente, tortue bleue = aléatoire, noire = balle, tortue sélectionnée = rouge
 
-
-## Reste à faire (par niveau de complexité)
 ---
+## Reste à faire (par niveau de complexité)
 Moyen :
 - Empécher la tortue de quitter le terrain quand elle est dirigée au clavier
 ---
