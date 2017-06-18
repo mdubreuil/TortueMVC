@@ -6,10 +6,6 @@ Projet du module d'ISI3 consacré aux Design Patterns
 
 ## TODO (par niveau de complexité)
 
-Simple :
-- Modifier le diagramme UML (rapport)
-- Expliquer les choix de conception (design patterns, MVC) (rapport)
-- Détailler les tests (rapport)
 ---
 Moyen :
 - Empécher la tortue de quitter le terrain quand elle est dirigée au clavier
