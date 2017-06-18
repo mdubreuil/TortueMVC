@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Ophélie EOUZAN 4APP
  */
 
-public class TestJeuBalle {
+public class JeuBalleTest {
     protected TortueJoueuse tortue2, tortue3, tortue4;
     protected JeuBalle jeu;
     
@@ -31,7 +31,7 @@ public class TestJeuBalle {
             
             jeu.ajouterTortue(tortue2);
         } catch (InterruptedException ex) {
-            Logger.getLogger(TestJeuBalle.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JeuBalleTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -10,7 +10,7 @@ import org.junit.Test;
  * @author Ophélie EOUZAN 4APP
  */
 
-public class TestTortueBalle {
+public class TortueBalleTest {
     protected TortueJoueuse tortue1, tortue2, tortue3, tortue4;
     protected TortueBalle balle;
     

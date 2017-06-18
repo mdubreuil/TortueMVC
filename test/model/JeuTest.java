@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author Ophélie EOUZAN 4APP
  */
 
-public class TestJeu {
+public class JeuTest {
     protected TortueJoueuse tortue2, tortue3, tortue4;
     protected Jeu jeu;
     

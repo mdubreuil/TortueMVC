@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  * @author Ophélie EOUZAN 4APP
  */
 
-public class TestTortue {
+public class TortueTest {
     protected Tortue tortue1;
     
     @Before

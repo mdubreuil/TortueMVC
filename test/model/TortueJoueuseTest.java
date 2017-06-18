@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Ophélie EOUZAN 4APP
  */
 
-public class TestTortueJoueuse {
+public class TortueJoueuseTest {
     protected TortueJoueuse tortue2, tortue3, tortue4;
     
     @Before

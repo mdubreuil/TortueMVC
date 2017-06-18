@@ -17,13 +17,13 @@ import view.VueTortueJoueuse;
  */
 public class TortueJoueuseFactory implements TortueFactory {
 
-    private boolean random = false;
+    private boolean aleatoire = false;
 
     public TortueJoueuseFactory() {
     }
 
     public TortueJoueuseFactory(boolean random) {
-        this.random = random;
+        this.aleatoire = random;
     }
     
      /**
@@ -53,7 +53,7 @@ public class TortueJoueuseFactory implements TortueFactory {
         }
         vueStrategie.ajouterTortue(tView);
 
-        if (random) {
+        if (aleatoire) {
             // Random position
             Random rand = new Random();
             int x = rand.nextInt(VueJeuBalle.width);
